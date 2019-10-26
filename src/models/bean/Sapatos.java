@@ -1,9 +1,12 @@
-package SapatariaInfo;
+package models.models;
+
+
 /*
 @Ruan Barroso e Flávia Valle
 @Alunos do CETAM - Projeto Exercicio Pratico - Banco de dados III
 @ruanx14@gmail.com || flaviafollowill@gmail.com 
 */
+import Conexao.Conexao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

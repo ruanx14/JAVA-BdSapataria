@@ -1,4 +1,4 @@
-package SapatariaInfo;
+package Conexao;
 /*
 @Ruan Barroso
 @Aluno do CETAM - Projeto Exercicio Pratico - Banco de dados III

@@ -1,4 +1,4 @@
-package SapatariaFrames;
+package views;
 import java.awt.Toolkit;
 
 /*

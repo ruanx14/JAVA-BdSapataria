@@ -1,12 +1,12 @@
-package SapatariaFrames;
+package views;
 
-import SapatariaInfo.Conexao;
-import SapatariaInfo.ModeloTabela;
-import SapatariaInfo.Pessoas;
-import SapatariaInfo.Sapatos;
-import SapatariaInfo.Vendas;
-import SapatariaInfo.GerarPDF;
-import SapatariaInfo.Vendas_Sapatos;
+import Conexao.Conexao;
+import models.models.ModeloTabela;
+import models.models.Pessoas;
+import models.models.Sapatos;
+import models.models.Vendas;
+import models.models.GerarPDF;
+import models.models.Vendas_Sapatos;
 import com.itextpdf.text.DocumentException;
 import java.awt.Toolkit;
 import java.io.File;
@@ -97,14 +97,12 @@ public class FormularioVendas extends javax.swing.JFrame {
         FUNDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1090, 600));
-        setPreferredSize(new java.awt.Dimension(1180, 500));
         setResizable(false);
         getContentPane().setLayout(null);
 
         jtfRetornoNomeSapato.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         getContentPane().add(jtfRetornoNomeSapato);
-        jtfRetornoNomeSapato.setBounds(10, 310, 187, 25);
+        jtfRetornoNomeSapato.setBounds(10, 310, 187, 23);
 
         jtfRetornoNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtfRetornoNome.addActionListener(new java.awt.event.ActionListener() {
@@ -113,7 +111,7 @@ public class FormularioVendas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jtfRetornoNome);
-        jtfRetornoNome.setBounds(10, 270, 187, 25);
+        jtfRetornoNome.setBounds(10, 270, 187, 23);
 
         jtfPrecoTotal.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
         jtfPrecoTotal.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +120,7 @@ public class FormularioVendas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jtfPrecoTotal);
-        jtfPrecoTotal.setBounds(102, 198, 162, 33);
+        jtfPrecoTotal.setBounds(102, 198, 162, 38);
 
         jCadastrarVenda.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jCadastrarVenda.setText("> Completar Venda <");
@@ -132,7 +130,7 @@ public class FormularioVendas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jCadastrarVenda);
-        jCadastrarVenda.setBounds(120, 380, 174, 33);
+        jCadastrarVenda.setBounds(120, 380, 177, 25);
 
         jVoltarMenu3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jVoltarMenu3.setText("> Voltar <");
@@ -142,7 +140,7 @@ public class FormularioVendas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jVoltarMenu3);
-        jVoltarMenu3.setBounds(300, 380, 95, 33);
+        jVoltarMenu3.setBounds(300, 380, 97, 25);
 
         jbClientes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbClientes.setText("Pesquisar");
@@ -152,7 +150,7 @@ public class FormularioVendas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbClientes);
-        jbClientes.setBounds(314, 98, 93, 37);
+        jbClientes.setBounds(314, 98, 95, 37);
 
         jcbFormaPagamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cartao Mastercard", "Cartao Visa", "Cartao Bradesco", "Cartao Itau", "Cartao da Loja", "Boleto Bancario - Parcelado", "Dinheiro - A vista" }));
@@ -162,7 +160,7 @@ public class FormularioVendas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jcbFormaPagamento);
-        jcbFormaPagamento.setBounds(176, 243, 233, 27);
+        jcbFormaPagamento.setBounds(176, 243, 233, 23);
 
         jbLimpar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbLimpar.setText("> Limpar <");
@@ -172,15 +170,15 @@ public class FormularioVendas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbLimpar);
-        jbLimpar.setBounds(10, 380, 101, 33);
+        jbLimpar.setBounds(10, 380, 103, 25);
 
         jtfRetornoMarca.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         getContentPane().add(jtfRetornoMarca);
-        jtfRetornoMarca.setBounds(10, 350, 187, 25);
+        jtfRetornoMarca.setBounds(10, 350, 187, 23);
 
         jtfRetornoTamanho.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         getContentPane().add(jtfRetornoTamanho);
-        jtfRetornoTamanho.setBounds(210, 350, 182, 25);
+        jtfRetornoTamanho.setBounds(210, 350, 182, 23);
 
         jlCpf.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jlCpf.setText("CPF Cliente");
@@ -204,7 +202,7 @@ public class FormularioVendas extends javax.swing.JFrame {
 
         jtfRetornoQtdEstoque.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         getContentPane().add(jtfRetornoQtdEstoque);
-        jtfRetornoQtdEstoque.setBounds(210, 270, 182, 25);
+        jtfRetornoQtdEstoque.setBounds(210, 270, 182, 23);
 
         try {
             jftCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -222,11 +220,11 @@ public class FormularioVendas extends javax.swing.JFrame {
         }
         jftfDataVenda.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
         getContentPane().add(jftfDataVenda);
-        jftfDataVenda.setBounds(102, 153, 197, 29);
+        jftfDataVenda.setBounds(102, 153, 197, 38);
 
         jtfRetornoRua.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         getContentPane().add(jtfRetornoRua);
-        jtfRetornoRua.setBounds(210, 310, 182, 25);
+        jtfRetornoRua.setBounds(210, 310, 182, 23);
 
         jtCarrinho.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtCarrinho.setModel(new javax.swing.table.DefaultTableModel(
@@ -258,11 +256,11 @@ public class FormularioVendas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbApagar);
-        jbApagar.setBounds(540, 380, 76, 33);
+        jbApagar.setBounds(540, 380, 79, 25);
 
         jtfQuantidadeTotal.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         getContentPane().add(jtfQuantidadeTotal);
-        jtfQuantidadeTotal.setBounds(534, 82, 99, 25);
+        jtfQuantidadeTotal.setBounds(534, 82, 99, 23);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Total de sapatos:");
@@ -277,7 +275,7 @@ public class FormularioVendas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbsetQtd);
-        jbsetQtd.setBounds(420, 380, 99, 33);
+        jbsetQtd.setBounds(420, 380, 101, 25);
 
         jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton2.setText("Procurar");
@@ -287,7 +285,7 @@ public class FormularioVendas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(730, 20, 85, 33);
+        jButton2.setBounds(730, 20, 87, 25);
 
         jbSalvar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbSalvar.setText("Adicionar ao carrinho");
@@ -297,7 +295,7 @@ public class FormularioVendas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbSalvar);
-        jbSalvar.setBounds(1000, 380, 165, 33);
+        jbSalvar.setBounds(1000, 380, 167, 25);
 
         jButton3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton3.setText("Pesquisar");
@@ -307,11 +305,11 @@ public class FormularioVendas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(1050, 20, 109, 33);
+        jButton3.setBounds(1050, 20, 109, 25);
 
         jtfSapato.setFont(new java.awt.Font("Aharoni", 1, 16)); // NOI18N
         getContentPane().add(jtfSapato);
-        jtfSapato.setBounds(680, 20, 40, 25);
+        jtfSapato.setBounds(680, 20, 40, 27);
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Tipo do Sapato/Marca");
@@ -326,11 +324,11 @@ public class FormularioVendas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbExibirTudo);
-        jbExibirTudo.setBounds(660, 380, 157, 33);
+        jbExibirTudo.setBounds(660, 380, 159, 25);
 
         jtfOutros.setFont(new java.awt.Font("Aharoni", 1, 16)); // NOI18N
         getContentPane().add(jtfOutros);
-        jtfOutros.setBounds(960, 20, 85, 25);
+        jtfOutros.setBounds(960, 20, 85, 27);
 
         jlText.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlText.setText("ID");

@@ -1,20 +1,29 @@
-package SapatariaFrames;
+package views;
 
-import SapatariaInfo.Sapatos;
+import models.models.Sapatos;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
+import Conexao.Conexao;
 
 /*
 @Ruan Barroso
-@Aluno do CETAM - Projeto Linguagem Programação III
+@Aluno do CETAM - Projeto Exercicio Praticos com Bando de Dados
 @ruanx14@gmail.com 
 */
-public class FormularioSapatos extends javax.swing.JFrame {
+
+public class AtualizarSapatos extends javax.swing.JFrame {
     Sapatos s1 = new Sapatos();
+    Object id;
+    VisualizarSapatos vs = new VisualizarSapatos();
+    Sapatos s2 = new Sapatos();
     
-    public FormularioSapatos() {
+    Conexao conecta = new Conexao();
+    public AtualizarSapatos() {
         initComponents();
-        //setIcon();
+        //setIcon();   
+        jtfID.setEnabled(false);
+        //jtfQtdEstoque.setText(String.valueOf(mostrarId()));
+       
     }
 
    
@@ -24,27 +33,27 @@ public class FormularioSapatos extends javax.swing.JFrame {
 
         jtfValor = new javax.swing.JTextField();
         jtfQtdEstoque = new javax.swing.JTextField();
-        jCadastrarSapatos = new javax.swing.JButton();
+        jbAtualizarDados = new javax.swing.JButton();
         jVoltarMenu2 = new javax.swing.JButton();
         jcbTamanho = new javax.swing.JComboBox<>();
         jcbMarca = new javax.swing.JComboBox<>();
         jcbGenero = new javax.swing.JComboBox<>();
         jcbTipo = new javax.swing.JComboBox<>();
-        jbLimpar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        fundoSapatos = new javax.swing.JLabel();
+        jtfID = new javax.swing.JTextField();
+        jbVerifID = new javax.swing.JButton();
+        FUNDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1060, 600));
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jtfValor.setFont(new java.awt.Font("Aharoni", 0, 36)); // NOI18N
+        jtfValor.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jtfValor.setText("00.00");
         jtfValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,24 +61,24 @@ public class FormularioSapatos extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jtfValor);
-        jtfValor.setBounds(660, 413, 120, 40);
+        jtfValor.setBounds(359, 379, 116, 35);
 
-        jtfQtdEstoque.setFont(new java.awt.Font("Aharoni", 0, 36)); // NOI18N
+        jtfQtdEstoque.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jtfQtdEstoque.setText("0");
         getContentPane().add(jtfQtdEstoque);
-        jtfQtdEstoque.setBounds(660, 240, 270, 45);
+        jtfQtdEstoque.setBounds(359, 215, 280, 43);
 
-        jCadastrarSapatos.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
-        jCadastrarSapatos.setText("> Cadastrar Sapato <");
-        jCadastrarSapatos.addActionListener(new java.awt.event.ActionListener() {
+        jbAtualizarDados.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jbAtualizarDados.setText("> Atualizar dados <");
+        jbAtualizarDados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCadastrarSapatosActionPerformed(evt);
+                jbAtualizarDadosActionPerformed(evt);
             }
         });
-        getContentPane().add(jCadastrarSapatos);
-        jCadastrarSapatos.setBounds(550, 460, 274, 41);
+        getContentPane().add(jbAtualizarDados);
+        jbAtualizarDados.setBounds(287, 425, 241, 37);
 
-        jVoltarMenu2.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
+        jVoltarMenu2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jVoltarMenu2.setText("> Voltar <");
         jVoltarMenu2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,103 +86,120 @@ public class FormularioSapatos extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jVoltarMenu2);
-        jVoltarMenu2.setBounds(840, 460, 143, 41);
+        jVoltarMenu2.setBounds(546, 425, 137, 37);
 
-        jcbTamanho.setFont(new java.awt.Font("Aharoni", 0, 36)); // NOI18N
+        jcbTamanho.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jcbTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "30-31", "32-33", "34-35", "36-37", "38-39", "40-41", "42-43", "44-45" }));
         getContentPane().add(jcbTamanho);
-        jcbTamanho.setBounds(660, 180, 270, 52);
+        jcbTamanho.setBounds(359, 162, 100, 35);
 
-        jcbMarca.setFont(new java.awt.Font("Aharoni", 0, 36)); // NOI18N
+        jcbMarca.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jcbMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Adidas", "Nike", "Fila", "Tryon", "Havaianas", "Coca-cola", "Sem marca" }));
         getContentPane().add(jcbMarca);
-        jcbMarca.setBounds(660, 300, 270, 50);
+        jcbMarca.setBounds(359, 272, 280, 38);
 
-        jcbGenero.setFont(new java.awt.Font("Aharoni", 0, 36)); // NOI18N
+        jcbGenero.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jcbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
         getContentPane().add(jcbGenero);
-        jcbGenero.setBounds(660, 360, 270, 50);
+        jcbGenero.setBounds(359, 328, 280, 35);
 
-        jcbTipo.setFont(new java.awt.Font("Aharoni", 0, 36)); // NOI18N
+        jcbTipo.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jcbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Percata", "Sandalia", "Salto alto", "Sapatilha", "Bota", "Tenis", "Sapato Social" }));
         getContentPane().add(jcbTipo);
-        jcbTipo.setBounds(660, 120, 270, 54);
+        jcbTipo.setBounds(359, 107, 280, 37);
 
-        jbLimpar.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
-        jbLimpar.setText("> Limpar < ");
-        jbLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbLimparActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jbLimpar);
-        jbLimpar.setBounds(380, 460, 157, 41);
-
-        jLabel2.setFont(new java.awt.Font("Aharoni", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Tipo de Sapato: ");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(230, 130, 275, 37);
+        jLabel2.setBounds(35, 112, 177, 29);
 
-        jLabel3.setFont(new java.awt.Font("Aharoni", 1, 36)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel3.setText("Tamanho: ");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(230, 190, 177, 37);
+        jLabel3.setBounds(35, 168, 115, 29);
 
-        jLabel4.setFont(new java.awt.Font("Aharoni", 1, 36)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel4.setText("Quantidade em estoque:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(230, 250, 420, 37);
+        jLabel4.setBounds(35, 222, 266, 29);
 
-        jLabel5.setFont(new java.awt.Font("Aharoni", 1, 36)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel5.setText("Marca: ");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(230, 300, 128, 37);
+        jLabel5.setBounds(35, 281, 79, 29);
 
-        jLabel6.setFont(new java.awt.Font("Aharoni", 1, 36)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel6.setText("Genero Sapato: ");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(230, 350, 279, 37);
+        jLabel6.setBounds(35, 331, 177, 29);
 
-        jLabel7.setFont(new java.awt.Font("Aharoni", 1, 36)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel7.setText("Preco do Sapato: ");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(230, 410, 301, 37);
+        jLabel7.setBounds(35, 382, 193, 29);
 
-        fundoSapatos.setFont(new java.awt.Font("Lucida Sans", 1, 48)); // NOI18N
-        fundoSapatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/fundosSapatos.png"))); // NOI18N
-        getContentPane().add(fundoSapatos);
-        fundoSapatos.setBounds(0, 0, 1060, 590);
+        jtfID.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        getContentPane().add(jtfID);
+        jtfID.setBounds(35, 425, 77, 33);
+
+        jbVerifID.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jbVerifID.setText("Verificar ID");
+        jbVerifID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbVerifIDActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jbVerifID);
+        jbVerifID.setBounds(118, 426, 163, 34);
+
+        FUNDO.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
+        FUNDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/fundosAlterarSapatos.png"))); // NOI18N
+        getContentPane().add(FUNDO);
+        FUNDO.setBounds(0, 0, 840, 520);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jVoltarMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVoltarMenu2ActionPerformed
-        BdSapataria bd = new BdSapataria();
-        bd.setVisible(true);
         dispose();
     }//GEN-LAST:event_jVoltarMenu2ActionPerformed
-
+    public void alterarId(Object id){
+        this.id = id;
+    }
+    public Object mostrarId(){
+        return id;
+    }
     private void jtfValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfValorActionPerformed
        
     }//GEN-LAST:event_jtfValorActionPerformed
 
-    private void jCadastrarSapatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCadastrarSapatosActionPerformed
+    private void jbAtualizarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarDadosActionPerformed
+      //JOptionPane.showMessageDialog(null,"Id: "+ mostrarId());
+        int id = Integer.parseInt(mostrarId().toString());
         s1.setTamanho(jcbTamanho.getSelectedItem().toString());
         s1.setMarca(jcbMarca.getSelectedItem().toString());
         s1.setValor(Double.parseDouble(jtfValor.getText()));
         s1.setQtdEstoque(Integer.parseInt(jtfQtdEstoque.getText()));
         s1.setTipoSapato(jcbTipo.getSelectedItem().toString());
         s1.setGeneroSapato(jcbGenero.getSelectedItem().toString());
-        if(s1.getQtdEstoque()>0 && s1.getValor()>0){
-            s1.cadastrarSapatos();
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "VALORES INVALIDOS ");
-        }
-    }//GEN-LAST:event_jCadastrarSapatosActionPerformed
-    private void jbLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparActionPerformed
-      limpar();
-    }//GEN-LAST:event_jbLimparActionPerformed
+        s1.setIdSapatos(Integer.parseInt(mostrarId().toString()));
+        if(s1.getQtdEstoque()>0 && s1.getValor()>0){ 
+            s1.updateSelecionado();
+            limpar();
+            dispose();
+            
+            }
+    
+     
+    }//GEN-LAST:event_jbAtualizarDadosActionPerformed
+
+    private void jbVerifIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerifIDActionPerformed
+      jtfID.setText(String.valueOf(mostrarId()));
+      int id = Integer.parseInt(mostrarId().toString());
+      verificarDados();
+      
+      
+    }//GEN-LAST:event_jbVerifIDActionPerformed
 
   
     public static void main(String args[]) {
@@ -190,14 +216,18 @@ public class FormularioSapatos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormularioSapatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AtualizarSapatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormularioSapatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AtualizarSapatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormularioSapatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AtualizarSapatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormularioSapatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AtualizarSapatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -206,14 +236,15 @@ public class FormularioSapatos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormularioSapatos().setVisible(true);
+                new AtualizarSapatos().setVisible(true);
+                
             }
+         
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel fundoSapatos;
-    private javax.swing.JButton jCadastrarSapatos;
+    private javax.swing.JLabel FUNDO;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -221,19 +252,34 @@ public class FormularioSapatos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JButton jVoltarMenu2;
-    private javax.swing.JButton jbLimpar;
+    private javax.swing.JButton jbAtualizarDados;
+    private javax.swing.JButton jbVerifID;
     private javax.swing.JComboBox<String> jcbGenero;
     private javax.swing.JComboBox<String> jcbMarca;
     private javax.swing.JComboBox<String> jcbTamanho;
     private javax.swing.JComboBox<String> jcbTipo;
+    private javax.swing.JTextField jtfID;
     private javax.swing.JTextField jtfQtdEstoque;
     private javax.swing.JTextField jtfValor;
     // End of variables declaration//GEN-END:variables
     public void limpar(){
     jtfQtdEstoque.setText("");
     jtfValor.setText(""); 
+    jtfID.setText("");
     }
     private void setIcon() {
     setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../SapatariaImagens/icone.png")));
     }
+    
+    public void verificarDados(){
+     s1.setIdSapatos(Integer.parseInt(mostrarId().toString()));
+     s2 = s1.selecionarSapatos(s1);
+     jtfQtdEstoque.setText(String.valueOf(s2.getQtdEstoque()));
+     jtfValor.setText(String.valueOf(s2.getValor()));
+     jcbMarca.setSelectedItem(s2.getMarca());
+     jcbTipo.setSelectedItem(s2.getTipoSapato());
+     jcbTamanho.setSelectedItem(s2.getTamanho());
+     jcbGenero.setSelectedItem(s2.getGeneroSapato());
+    }
+    
 }
