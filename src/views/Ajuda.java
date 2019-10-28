@@ -101,7 +101,7 @@ public class Ajuda extends javax.swing.JFrame {
     private void jButton1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseMoved
         setBackground(Color.green);
         try {
-            Desktop.getDesktop().browse(URI.create("https://www.facebook.com/ruanx14"));
+            Desktop.getDesktop().browse(URI.create("https://www.github.com/ruanx14"));
         } catch (IOException ex) {
             Logger.getLogger(Ajuda.class.getName()).log(Level.SEVERE, null, ex);
         }

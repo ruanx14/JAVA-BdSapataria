@@ -1,27 +1,35 @@
 package views;
-import java.awt.Toolkit;
 
-/*
-@Ruan Barroso
-@Aluno do CETAM - Projeto Exercicios práticos - Banco de Dados III
-@ruanx14@gmail.com 
-*/
+import java.awt.event.ActionListener;
+
+import views.*;
+import controllers.*;
+
 public class BdSapataria extends javax.swing.JFrame {
-    VisualizarSapatos vs = null;
-    VisualizarVendas vv = null;
-    VisualizarPessoas vp = null;
-    
-    FormularioPessoas fp = null;
-    FormularioSapatos fs = null;
-    FormularioVendas fv = null;
-    
     Ajuda hp = null;
-    
     public BdSapataria() {
        initComponents();
-       //setIcon();
     }
- 
+    public void telaCadastrarPessoa(ActionListener listener){
+        jbCadastrarPessoas.addActionListener(listener);
+    }
+    public void telaCadastrarSapatos(ActionListener listener){
+        jbCadastrarSapatos.addActionListener(listener);
+    }
+    public void telaCadastrarVendas(ActionListener listener){
+        jbCadastrarVendas.addActionListener(listener);
+    }
+    
+     public void telaVisualizarPessoas(ActionListener listener){
+        jbPessoas.addActionListener(listener);
+    }
+    public void telaVisualizarSapatos(ActionListener listener){
+        jbSapatos.addActionListener(listener);
+    }
+    public void telaVisualizarVendas(ActionListener listener){
+        jbVendas.addActionListener(listener);
+    }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -77,11 +85,6 @@ public class BdSapataria extends javax.swing.JFrame {
         jbCadastrarVendas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbCadastrarVendas.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jbCadastrarVendas.setPreferredSize(new java.awt.Dimension(650, 210));
-        jbCadastrarVendas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCadastrarVendasActionPerformed(evt);
-            }
-        });
 
         jbCadastrarSapatos.setBackground(new java.awt.Color(204, 204, 204));
         jbCadastrarSapatos.setFont(new java.awt.Font("Meiryo", 1, 24)); // NOI18N
@@ -89,11 +92,6 @@ public class BdSapataria extends javax.swing.JFrame {
         jbCadastrarSapatos.setText("              Cadastrar Sapatos");
         jbCadastrarSapatos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jbCadastrarSapatos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jbCadastrarSapatos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCadastrarSapatosActionPerformed(evt);
-            }
-        });
 
         jbCadastrarPessoas.setBackground(new java.awt.Color(204, 204, 204));
         jbCadastrarPessoas.setFont(new java.awt.Font("Meiryo", 1, 24)); // NOI18N
@@ -103,11 +101,6 @@ public class BdSapataria extends javax.swing.JFrame {
         jbCadastrarPessoas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbCadastrarPessoas.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jbCadastrarPessoas.setPreferredSize(new java.awt.Dimension(650, 210));
-        jbCadastrarPessoas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCadastrarPessoasActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout Guias1Layout = new javax.swing.GroupLayout(Guias1);
         Guias1.setLayout(Guias1Layout);
@@ -138,11 +131,6 @@ public class BdSapataria extends javax.swing.JFrame {
         jbPessoas.setToolTipText("");
         jbPessoas.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jbPessoas.setPreferredSize(new java.awt.Dimension(650, 210));
-        jbPessoas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbPessoasActionPerformed(evt);
-            }
-        });
 
         jbSapatos.setFont(new java.awt.Font("Meiryo", 1, 24)); // NOI18N
         jbSapatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/visualizarSapatos.png"))); // NOI18N
@@ -150,21 +138,11 @@ public class BdSapataria extends javax.swing.JFrame {
         jbSapatos.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jbSapatos.setMinimumSize(new java.awt.Dimension(650, 210));
         jbSapatos.setPreferredSize(new java.awt.Dimension(650, 210));
-        jbSapatos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSapatosActionPerformed(evt);
-            }
-        });
 
         jbVendas.setFont(new java.awt.Font("Meiryo", 1, 24)); // NOI18N
         jbVendas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/visualizarVendas.png"))); // NOI18N
         jbVendas.setText("Visualizar Vendas                  ");
         jbVendas.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jbVendas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbVendasActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout Guias2Layout = new javax.swing.GroupLayout(Guias2);
         Guias2.setLayout(Guias2Layout);
@@ -263,11 +241,6 @@ public class BdSapataria extends javax.swing.JFrame {
         jmMenu.add(jmVisualizar);
 
         jmAjuda.setText("Ajuda");
-        jmAjuda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmAjudaActionPerformed(evt);
-            }
-        });
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         jMenuItem1.setText("Ajuda");
@@ -288,53 +261,28 @@ public class BdSapataria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiCadastrarPessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastrarPessoasActionPerformed
-        if(fp==null){
-         fp = new FormularioPessoas(); 
-        }
-        fp.setVisible(true);
-        dispose();
+       new FormularioPessoasController(new FormularioPessoas());
     }//GEN-LAST:event_jmiCadastrarPessoasActionPerformed
    
     private void jmVisualizarVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmVisualizarVendasActionPerformed
-      if(vv==null){
-      vv = new VisualizarVendas();
-      }
-      vv.setVisible(true);
+       new VisualizarVendasController(new VisualizarVendas());
     }//GEN-LAST:event_jmVisualizarVendasActionPerformed
 
     private void jmiCadastrarSapatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastrarSapatosActionPerformed
-        if(fs==null){
-        fs = new FormularioSapatos();
-        }
-        fs.setVisible(true);
-        dispose();
+        new FormularioSapatosController(new FormularioSapatos());
     }//GEN-LAST:event_jmiCadastrarSapatosActionPerformed
 
     private void jmiCadastrarVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastrarVendasActionPerformed
-        if(fv==null){ 
-        fv = new FormularioVendas();
-        }
-        fv.setVisible(true);
-        dispose();
+       new FormularioVendasController(new FormularioVendas());
     }//GEN-LAST:event_jmiCadastrarVendasActionPerformed
 
     private void jmiVisualizarSapatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiVisualizarSapatosActionPerformed
-        if(vs==null){
-            vs = new VisualizarSapatos();
-        }
-        vs.setVisible(true);  
+       new VisualizarSapatosController(new VisualizarSapatos());  
     }//GEN-LAST:event_jmiVisualizarSapatosActionPerformed
 
     private void jmiVisualizarPessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiVisualizarPessoasActionPerformed
-       if(vp==null){
-            vp = new VisualizarPessoas();
-        }
-        vp.setVisible(true);  
+       new VisualizarPessoasController(new VisualizarPessoas());  
     }//GEN-LAST:event_jmiVisualizarPessoasActionPerformed
-
-    private void jmAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAjudaActionPerformed
-
-    }//GEN-LAST:event_jmAjudaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
      if(hp==null){
@@ -342,52 +290,6 @@ public class BdSapataria extends javax.swing.JFrame {
         }
         hp.setVisible(true);  
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jbVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVendasActionPerformed
-        if(vv==null){
-            vv = new VisualizarVendas();
-        }
-        vv.setVisible(true);
-    }//GEN-LAST:event_jbVendasActionPerformed
-
-    private void jbSapatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSapatosActionPerformed
-        if(vs==null){
-            vs = new VisualizarSapatos();
-        }
-        vs.setVisible(true);
-    }//GEN-LAST:event_jbSapatosActionPerformed
-
-    private void jbPessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPessoasActionPerformed
-        if(vp==null){
-            vp = new VisualizarPessoas();
-        }
-        vp.setVisible(true);
-
-    }//GEN-LAST:event_jbPessoasActionPerformed
-
-    private void jbCadastrarVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarVendasActionPerformed
-        if(fv==null){
-            fv = new FormularioVendas();
-        }
-        fv.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jbCadastrarVendasActionPerformed
-
-    private void jbCadastrarSapatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarSapatosActionPerformed
-        if(fs==null){
-            fs = new FormularioSapatos();
-        }
-        fs.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jbCadastrarSapatosActionPerformed
-
-    private void jbCadastrarPessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarPessoasActionPerformed
-        if(fp==null){
-            fp = new FormularioPessoas();
-        }
-        fp.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jbCadastrarPessoasActionPerformed
    
     /**
      * @param args the command line arguments
@@ -454,7 +356,4 @@ public class BdSapataria extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiVisualizarSapatos;
     // End of variables declaration//GEN-END:variables
 
-    private void setIcon(){
-    setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../SapatariaImagens/icone.png")));
-    }
 }

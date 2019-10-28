@@ -1,31 +1,12 @@
 package views;
 
-import Conexao.Conexao;
-import models.models.ModeloTabela;
-import java.awt.Toolkit;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import java.awt.event.ActionListener;
 
-/*
-@Ruan Barroso
-@Aluno do CETAM - Projeto Exercicio Praticos com Bando de Dados
-@ruanx14@gmail.com || 
-*/
 
 public class VisualizarSapatos extends javax.swing.JFrame {
-        Conexao conecta = new Conexao();
-        int vt;
-        AtualizarSapatos as;
-
- 
    
     public VisualizarSapatos() {
-        initComponents();
-        //setIcon();
-        jtfQuantidadeTotal.setEnabled(false);
-        //setSize(1090,630);
-        
+        initComponents();        
     }
 
    
@@ -49,15 +30,11 @@ public class VisualizarSapatos extends javax.swing.JFrame {
         FUNDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1072, 629));
         setResizable(false);
         getContentPane().setLayout(null);
 
         jtfQuantidadeTotal.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
-        jtfQuantidadeTotal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfQuantidadeTotalActionPerformed(evt);
-            }
-        });
         getContentPane().add(jtfQuantidadeTotal);
         jtfQuantidadeTotal.setBounds(910, 500, 85, 38);
 
@@ -76,20 +53,10 @@ public class VisualizarSapatos extends javax.swing.JFrame {
 
         jbExibirTudo.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
         jbExibirTudo.setText("Exibir tudo");
-        jbExibirTudo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbExibirTudoActionPerformed(evt);
-            }
-        });
         getContentPane().add(jbExibirTudo);
-        jbExibirTudo.setBounds(30, 492, 180, 41);
+        jbExibirTudo.setBounds(30, 490, 180, 41);
 
         jtfSapato.setFont(new java.awt.Font("Aharoni", 1, 14)); // NOI18N
-        jtfSapato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfSapatoActionPerformed(evt);
-            }
-        });
         getContentPane().add(jtfSapato);
         jtfSapato.setBounds(110, 10, 83, 25);
 
@@ -100,11 +67,6 @@ public class VisualizarSapatos extends javax.swing.JFrame {
 
         jbSapato.setFont(new java.awt.Font("Aharoni", 1, 14)); // NOI18N
         jbSapato.setText("Procurar");
-        jbSapato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSapatoActionPerformed(evt);
-            }
-        });
         getContentPane().add(jbSapato);
         jbSapato.setBounds(200, 10, 93, 27);
 
@@ -118,23 +80,13 @@ public class VisualizarSapatos extends javax.swing.JFrame {
 
         jbVoltar.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
         jbVoltar.setText("> Voltar <");
-        jbVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbVoltarActionPerformed(evt);
-            }
-        });
         getContentPane().add(jbVoltar);
-        jbVoltar.setBounds(850, 540, 143, 41);
+        jbVoltar.setBounds(800, 550, 143, 41);
 
         jbAlterar.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
         jbAlterar.setText("Alterar dados");
-        jbAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAlterarActionPerformed(evt);
-            }
-        });
         getContentPane().add(jbAlterar);
-        jbAlterar.setBounds(220, 492, 210, 41);
+        jbAlterar.setBounds(220, 490, 210, 41);
 
         jlNada.setFont(new java.awt.Font("Aharoni", 1, 14)); // NOI18N
         jlNada.setText("Marca ou tipo de sapato: ");
@@ -147,11 +99,6 @@ public class VisualizarSapatos extends javax.swing.JFrame {
 
         jbProcurarTudo.setFont(new java.awt.Font("Aharoni", 1, 14)); // NOI18N
         jbProcurarTudo.setText("Procurar");
-        jbProcurarTudo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbProcurarTudoActionPerformed(evt);
-            }
-        });
         getContentPane().add(jbProcurarTudo);
         jbProcurarTudo.setBounds(686, 11, 93, 27);
 
@@ -161,52 +108,24 @@ public class VisualizarSapatos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jbExibirTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExibirTudoActionPerformed
-    preencherTabela("select * from sapatos");
-    preencherValorTotal("select count(*) from sapatos");
+   
     
-    }//GEN-LAST:event_jbExibirTudoActionPerformed
-
-    private void jbSapatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSapatoActionPerformed
-      preencherTabela("select * from sapatos where idSapatos="+jtfSapato.getText());
-      limpar();
-    }//GEN-LAST:event_jbSapatoActionPerformed
-
-    private void jtfQuantidadeTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfQuantidadeTotalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfQuantidadeTotalActionPerformed
-
-    private void jtfSapatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSapatoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfSapatoActionPerformed
-
-    private void jbVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVoltarActionPerformed
-    dispose();
-    }//GEN-LAST:event_jbVoltarActionPerformed
-
-    private void jbProcurarTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProcurarTudoActionPerformed
-    preencherTabela("select * from sapatos where marca='"+jtfOutros.getText()+"' or tipoSapato='"+jtfOutros.getText()+"'");
-    preencherValorTotal("select count(*) from sapatos where marca='"+jtfOutros.getText()+"' or tipoSapato='"+jtfOutros.getText()+"'");
-    }//GEN-LAST:event_jbProcurarTudoActionPerformed
-    public Object retornarId(){
-        return jtVendas.getValueAt(jtVendas.getSelectedRow(),0);
+     public void jVoltarMenu(ActionListener evt){
+        jbVoltar.addActionListener(evt);
     }
-    private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
-      if(as==null){
-      as = new AtualizarSapatos();
-      }
-      if((int)retornarId()!=0){
-      as.setVisible(true);
-      }else{
-      JOptionPane.showMessageDialog(null,"Nenhum Selecionado");    
-      }  
-      as.alterarId(retornarId());
-      as.verificarDados();
-    }//GEN-LAST:event_jbAlterarActionPerformed
-
-    public static void main(String args[]) {
-      
+    public void jAlterarDados(ActionListener evt){
+        jbAlterar.addActionListener(evt);
+    }
+    public void jExibirTudo(ActionListener evt){
+        jbExibirTudo.addActionListener(evt);
+    }
+    public void jPorNome(ActionListener evt){
+        jbProcurarTudo.addActionListener(evt);
+    }
+    public void jPorID(ActionListener evt){
+        jbSapato.addActionListener(evt);
+    }
+     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VisualizarSapatos().setVisible(true);
@@ -230,51 +149,5 @@ public class VisualizarSapatos extends javax.swing.JFrame {
     private javax.swing.JTextField jtfSapato;
     // End of variables declaration//GEN-END:variables
 
- 
- public void preencherTabela(String sql){
-        ArrayList<Object> dados = new ArrayList<>();
-        String [] colunas = new String[]{"idSapatos","tipoSapato","valor","qtdEstoque", "generoSapato","tamanho","marca"};
-        conecta.abrirBdcon();
-        conecta.executaSql(sql);
-        try {
-            conecta.rs.first();
-            do {
-                dados.add(new Object[]{conecta.rs.getInt("idSapatos"),conecta.rs.getString("tipoSapato"),conecta.rs.getDouble("valor"),conecta.rs.getInt("qtdEstoque"),conecta.rs.getString("generoSapato"),conecta.rs.getString("tamanho"),conecta.rs.getString("marca")});
-            }while(conecta.rs.next()); 
-        }
-        catch(SQLException ex){
-            System.out.println("Erro ao preencher tabela  "+sql+" "+ex.getMessage());
-        }
-        ModeloTabela modelo = new ModeloTabela(dados, colunas);
-        jtVendas.setModel(modelo);     
-        conecta.fecharBdcon();     
 }
- 
- 
- public void preencherValorTotal(String sql){
-     int valorTotal=0;
-     conecta.abrirBdcon();
-     conecta.executaSql(sql);
-     try{
-       conecta.rs.first();
-       valorTotal = conecta.rs.getInt("count(*)");
-     }
-     catch(SQLException e){
-         System.out.println("Erro ao pegar valor total."+ e.getMessage());
-     }
-     jtfQuantidadeTotal.setText(Integer.toString(valorTotal));
-    
-    
- }
- 
-   public void limpar(){
-       jtfQuantidadeTotal.setText("");
-   }
-   
-   private void setIcon() {
-   setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../SapatariaImagens/icone.png")));
-   }
-   
-}
-
 

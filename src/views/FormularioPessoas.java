@@ -1,23 +1,44 @@
 package views;
-/*
-@Ruan Barroso
-@Aluno do CETAM - Projeto Exercicios práticos - Banco de Dados III
-@ruanx14@gmail.com 
-*/
-import models.models.Pessoas;
-import java.awt.Toolkit;
-import javax.swing.JOptionPane;
-import javax.swing.text.MaskFormatter;
+
+
+import java.awt.event.ActionListener;
+
 
 public class FormularioPessoas extends javax.swing.JFrame {
-    Pessoas p1 = new Pessoas();
-    String tt;
-    
     public FormularioPessoas() {
         initComponents();
-        //setIcon();
     }
-
+    public String getJtfNome(){
+        return jtfNome.getText();
+    }
+    public String getJtfBairro(){
+        return jtfBairro.getText();
+    }
+    public String getJtfRua(){
+        return jtfRua.getText();
+    }
+    public void setJtfNome(String nome){
+        jtfNome.setText(nome);
+    }
+    public void setJtfBairro(String bairro){
+        jtfBairro.setText(bairro);
+    }
+    public void setJtfRua(String rua){
+        jtfRua.setText(rua);
+    }
+    //Falta combo box estado, genero, || mask camp cpf e numero
+    
+    //Criando métodos para serem chamados no controller e atribuindo as actionlistener aos botoes das views.
+    public void jCadastrarPessoa(ActionListener evt){
+        this.jCadastrarPessoa.addActionListener(evt);
+    }
+    public void jLimpar(ActionListener evt){
+        this.jbLimpar.addActionListener(evt);
+    }
+    public void jVoltarMenu(ActionListener evt){
+        this.jVoltarMenu.addActionListener(evt);
+    }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -44,16 +65,12 @@ public class FormularioPessoas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 153));
+        setPreferredSize(new java.awt.Dimension(1067, 600));
         setResizable(false);
         getContentPane().setLayout(null);
 
         jtfNome.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         jtfNome.setToolTipText("");
-        jtfNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfNomeActionPerformed(evt);
-            }
-        });
         getContentPane().add(jtfNome);
         jtfNome.setBounds(428, 134, 571, 40);
 
@@ -64,32 +81,17 @@ public class FormularioPessoas extends javax.swing.JFrame {
         jCadastrarPessoa.setFont(new java.awt.Font("Aharoni", 0, 24)); // NOI18N
         jCadastrarPessoa.setText("> Cadastrar < ");
         jCadastrarPessoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jCadastrarPessoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCadastrarPessoaActionPerformed(evt);
-            }
-        });
         getContentPane().add(jCadastrarPessoa);
         jCadastrarPessoa.setBounds(628, 517, 187, 41);
 
         jVoltarMenu.setFont(new java.awt.Font("Aharoni", 0, 24)); // NOI18N
         jVoltarMenu.setText("> Voltar < ");
         jVoltarMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jVoltarMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jVoltarMenuActionPerformed(evt);
-            }
-        });
         getContentPane().add(jVoltarMenu);
         jVoltarMenu.setBounds(829, 517, 143, 41);
 
         jcbEstado.setFont(new java.awt.Font("Aharoni", 0, 36)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "SP", "RJ", "SC", "MT", "MS", "PA", "AP", "RO", "AC", "RM", "BA", "PE", "PI", "SE", "MA", " ", " " }));
-        jcbEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbEstadoActionPerformed(evt);
-            }
-        });
         getContentPane().add(jcbEstado);
         jcbEstado.setBounds(839, 441, 143, 53);
 
@@ -101,11 +103,6 @@ public class FormularioPessoas extends javax.swing.JFrame {
         jbLimpar.setFont(new java.awt.Font("Aharoni", 0, 24)); // NOI18N
         jbLimpar.setText("> Limpar < ");
         jbLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jbLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbLimparActionPerformed(evt);
-            }
-        });
         getContentPane().add(jbLimpar);
         jbLimpar.setBounds(459, 517, 155, 41);
 
@@ -173,42 +170,6 @@ public class FormularioPessoas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNomeActionPerformed
-        
-    }//GEN-LAST:event_jtfNomeActionPerformed
-
-    private void jVoltarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVoltarMenuActionPerformed
-        BdSapataria fp = new BdSapataria();
-        fp.setVisible(true);
-        dispose();
-       
-    }//GEN-LAST:event_jVoltarMenuActionPerformed
-
-    private void jCadastrarPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCadastrarPessoaActionPerformed
-      p1.setNome(jtfNome.getText());
-      p1.setBairro(jtfBairro.getText());
-      p1.setRua(jtfRua.getText());
-      p1.setCpf(jftCpf.getText());
-      p1.setGenero(jcbGeneros.getSelectedItem().toString());
-      p1.setTelefone(jftTelefone.getText());
-      p1.setEstado(jcbEstado.getSelectedItem().toString());
-      if((jftCpf.getText().length()>14)&&(jftCpf.getText().length()<14)){
-            JOptionPane.showMessageDialog(null,"Dados Invalidos");
-      }
-      else{
-           p1.cadastrarPessoas();
-           limpar(); 
-      }
-       
-    }//GEN-LAST:event_jCadastrarPessoaActionPerformed
-    private void jbLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparActionPerformed
-      limpar();
-    }//GEN-LAST:event_jbLimparActionPerformed
-
-    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
-       
-    }//GEN-LAST:event_jcbEstadoActionPerformed
-
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -265,14 +226,4 @@ public class FormularioPessoas extends javax.swing.JFrame {
     private javax.swing.JTextField jtfRua;
     // End of variables declaration//GEN-END:variables
 
-    public void limpar(){
-    jftCpf.setText("");
-    jtfBairro.setText("");
-    jtfRua.setText("");
-    jtfNome.setText("");
-    jftTelefone.setText("");
-    }
-    private void setIcon() {
-    setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../SapatariaImagens/icone.png")));
-    } 
 }

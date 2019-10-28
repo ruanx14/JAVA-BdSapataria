@@ -1,32 +1,29 @@
 package views;
 
-import Conexao.Conexao;
-import models.models.ModeloTabela;
-import java.awt.Toolkit;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-
-/*
-@Ruan Barroso
-@Aluno do CETAM - Projeto Exercicio Praticos com Bando de Dados
-@ruanx14@gmail.com 
-*/
+import java.awt.event.ActionListener;
 
 
 public class VisualizarVendas extends javax.swing.JFrame {
-        Conexao conecta = new Conexao();
-        int vt;
-
- 
    
     public VisualizarVendas() {
-        initComponents();
-        //setIcon();
-        jtfQuantidadeTotal.setEnabled(false);
-        
+        initComponents();        
     }
-
+    public void jVoltarMenu(ActionListener evt){
+        jbVoltar.addActionListener(evt);
+    }
+    public void jExibirTudo(ActionListener evt){
+        jbExibirTudo.addActionListener(evt);
+    }
+    public void jPorNome(ActionListener evt){
+        jbProcurarTudo.addActionListener(evt);
+    }
+    public void jPorID(ActionListener evt){
+        jbVenda.addActionListener(evt);
+    }
+    public void jDataVenda(ActionListener evt){
+        jbDataVenda.addActionListener(evt);
+    }
+    
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -38,27 +35,23 @@ public class VisualizarVendas extends javax.swing.JFrame {
         jbExibirTudo = new javax.swing.JButton();
         jtfSapato = new javax.swing.JTextField();
         jlVendas = new javax.swing.JLabel();
-        jbSapato = new javax.swing.JButton();
+        jbVenda = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jbVoltar = new javax.swing.JButton();
         jlNada = new javax.swing.JLabel();
         jtfOutros = new javax.swing.JTextField();
         jbProcurarTudo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jbDataVenda = new javax.swing.JButton();
         jtfDataVenda = new javax.swing.JFormattedTextField();
         jlFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1115, 625));
         setResizable(false);
         getContentPane().setLayout(null);
 
         jtfQuantidadeTotal.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
-        jtfQuantidadeTotal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfQuantidadeTotalActionPerformed(evt);
-            }
-        });
         getContentPane().add(jtfQuantidadeTotal);
         jtfQuantidadeTotal.setBounds(961, 492, 85, 38);
 
@@ -77,20 +70,10 @@ public class VisualizarVendas extends javax.swing.JFrame {
 
         jbExibirTudo.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
         jbExibirTudo.setText("Exibir tudo");
-        jbExibirTudo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbExibirTudoActionPerformed(evt);
-            }
-        });
         getContentPane().add(jbExibirTudo);
         jbExibirTudo.setBounds(30, 492, 207, 41);
 
         jtfSapato.setFont(new java.awt.Font("Aharoni", 1, 14)); // NOI18N
-        jtfSapato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfSapatoActionPerformed(evt);
-            }
-        });
         getContentPane().add(jtfSapato);
         jtfSapato.setBounds(132, 12, 56, 25);
 
@@ -99,15 +82,10 @@ public class VisualizarVendas extends javax.swing.JFrame {
         getContentPane().add(jlVendas);
         jlVendas.setBounds(20, 11, 94, 24);
 
-        jbSapato.setFont(new java.awt.Font("Aharoni", 1, 14)); // NOI18N
-        jbSapato.setText("Procurar");
-        jbSapato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSapatoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jbSapato);
-        jbSapato.setBounds(198, 11, 93, 27);
+        jbVenda.setFont(new java.awt.Font("Aharoni", 1, 14)); // NOI18N
+        jbVenda.setText("Procurar");
+        getContentPane().add(jbVenda);
+        jbVenda.setBounds(198, 11, 93, 27);
 
         jLabel1.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -119,13 +97,8 @@ public class VisualizarVendas extends javax.swing.JFrame {
 
         jbVoltar.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
         jbVoltar.setText("> Voltar <");
-        jbVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbVoltarActionPerformed(evt);
-            }
-        });
         getContentPane().add(jbVoltar);
-        jbVoltar.setBounds(916, 541, 143, 41);
+        jbVoltar.setBounds(850, 540, 143, 41);
 
         jlNada.setFont(new java.awt.Font("Aharoni", 1, 14)); // NOI18N
         jlNada.setText("Nome do cliente/Tipo do Sapato");
@@ -138,11 +111,6 @@ public class VisualizarVendas extends javax.swing.JFrame {
 
         jbProcurarTudo.setFont(new java.awt.Font("Aharoni", 1, 14)); // NOI18N
         jbProcurarTudo.setText("Pesquisar");
-        jbProcurarTudo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbProcurarTudoActionPerformed(evt);
-            }
-        });
         getContentPane().add(jbProcurarTudo);
         jbProcurarTudo.setBounds(650, 11, 103, 27);
 
@@ -151,15 +119,10 @@ public class VisualizarVendas extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(765, 15, 104, 19);
 
-        jButton1.setFont(new java.awt.Font("Aharoni", 1, 14)); // NOI18N
-        jButton1.setText("Pesquisar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(982, 11, 103, 27);
+        jbDataVenda.setFont(new java.awt.Font("Aharoni", 1, 14)); // NOI18N
+        jbDataVenda.setText("Pesquisar");
+        getContentPane().add(jbDataVenda);
+        jbDataVenda.setBounds(982, 11, 103, 27);
 
         try {
             jtfDataVenda.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -170,47 +133,12 @@ public class VisualizarVendas extends javax.swing.JFrame {
         jtfDataVenda.setBounds(876, 12, 96, 20);
 
         jlFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/fundoVisualizarAll.png"))); // NOI18N
+        jlFundo.setPreferredSize(new java.awt.Dimension(1110, 610));
         getContentPane().add(jlFundo);
-        jlFundo.setBounds(0, 0, 1110, 610);
+        jlFundo.setBounds(0, 0, 1120, 600);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jbExibirTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExibirTudoActionPerformed
-    preencherTabela("select v.idVendas,s.tipoSapato,p.nome,v.dataVenda,v.formaPagamento,v.total,vs.qtdPedidos,s.valor from vendas v join vendas_sapatos vs on v.idVendas=vs.idVendas join sapatos s on s.idSapatos=vs.idSapatos join pessoas p on p.idPessoas = v.Pessoas_idPessoas");
-    preencherValorTotal("select count(*) from vendas v join vendas_sapatos vs on v.idVendas=vs.idVendas join sapatos s on s.idSapatos=vs.idSapatos join pessoas p on p.idPessoas = v.Pessoas_idPessoas");
-    
-    }//GEN-LAST:event_jbExibirTudoActionPerformed
-
-    private void jbSapatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSapatoActionPerformed
-      preencherTabela("select v.idVendas,s.tipoSapato,p.nome,v.dataVenda,v.formaPagamento,v.total,vs.qtdPedidos,s.valor from vendas v join vendas_sapatos vs on v.idVendas=vs.idVendas join sapatos s on s.idSapatos=vs.idSapatos join pessoas p on p.idPessoas = v.Pessoas_idPessoas where v.idVendas="+jtfSapato.getText());
-      limpar();
-    }//GEN-LAST:event_jbSapatoActionPerformed
-
-    private void jtfQuantidadeTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfQuantidadeTotalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfQuantidadeTotalActionPerformed
-
-    private void jtfSapatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSapatoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfSapatoActionPerformed
-
-    private void jbVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVoltarActionPerformed
-    dispose();
-    }//GEN-LAST:event_jbVoltarActionPerformed
-
-    private void jbProcurarTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProcurarTudoActionPerformed
-     preencherTabela("select v.idVendas,s.tipoSapato,p.nome,v.dataVenda,v.formaPagamento,v.total,vs.qtdPedidos,s.valor from vendas v join vendas_sapatos vs on v.idVendas=vs.idVendas join sapatos s on s.idSapatos=vs.idSapatos join pessoas p on p.idPessoas = v.Pessoas_idPessoas where s.tipoSapato like '%"+jtfOutros.getText()+"%' or p.nome like '%"+jtfOutros.getText()+"%'");
-     preencherValorTotal("select count(*) from vendas v join vendas_sapatos vs on v.idVendas=vs.idVendas join sapatos s on s.idSapatos=vs.idSapatos join pessoas p on p.idPessoas = v.Pessoas_idPessoas where s.tipoSapato like '%"+jtfOutros.getText()+"%' or p.nome like '%"+jtfOutros.getText()+"%'");
-    
- 
-    }//GEN-LAST:event_jbProcurarTudoActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    preencherTabela("select v.idVendas,s.tipoSapato,p.nome,v.dataVenda,v.formaPagamento,v.total,vs.qtdPedidos,s.valor from vendas v join vendas_sapatos vs on v.idVendas=vs.idVendas join sapatos s on s.idSapatos=vs.idSapatos join pessoas p on p.idPessoas = v.Pessoas_idPessoas where v.dataVenda='"+jtfDataVenda.getText()+"'");
-    preencherValorTotal("select count(*) from vendas v join vendas_sapatos vs on v.idVendas=vs.idVendas join sapatos s on s.idSapatos=vs.idSapatos join pessoas p on p.idPessoas = v.Pessoas_idPessoas where v.dataVenda='"+jtfDataVenda.getText()+"'");
-    
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
       
@@ -221,13 +149,13 @@ public class VisualizarVendas extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton jbDataVenda;
     private javax.swing.JButton jbExibirTudo;
     private javax.swing.JButton jbProcurarTudo;
-    private javax.swing.JButton jbSapato;
+    private javax.swing.JButton jbVenda;
     private javax.swing.JButton jbVoltar;
     private javax.swing.JLabel jlFundo;
     private javax.swing.JLabel jlNada;
@@ -239,49 +167,6 @@ public class VisualizarVendas extends javax.swing.JFrame {
     private javax.swing.JTextField jtfSapato;
     // End of variables declaration//GEN-END:variables
 
- 
- public void preencherTabela(String sql){
-        ArrayList<Object> dados = new ArrayList<>();
-        String [] colunas = new String[]{"IdVendas","Tipo do sapato","Cliente","Data da venda","Forma de Pagamento","Total/Venda","Quantidade Comprada","Preco Unitario"};
-        conecta.abrirBdcon();
-        conecta.executaSql(sql);
-        try {
-            conecta.rs.first();
-            do {
-                dados.add(new Object[]{conecta.rs.getInt("idVendas"),conecta.rs.getString("tipoSapato"),conecta.rs.getString("nome"),conecta.rs.getString("dataVenda"),conecta.rs.getString("formaPagamento"),conecta.rs.getDouble("total"),conecta.rs.getInt("qtdPedidos"),conecta.rs.getDouble("valor")});
-            }while(conecta.rs.next()); 
-        }
-        catch(SQLException ex){
-            System.out.println("Erro ao preencher tabela  "+sql+" "+ex.getMessage());
-        }
-        ModeloTabela modelo = new ModeloTabela(dados, colunas);
-        jtVendas.setModel(modelo);     
-        conecta.fecharBdcon();     
-}
- 
- 
- public void preencherValorTotal(String sql){
-     int valorTotal=0;
-     conecta.abrirBdcon();
-     conecta.executaSql(sql);
-     try{
-       conecta.rs.first();
-       valorTotal = conecta.rs.getInt("count(*)");
-     }
-     catch(SQLException e){
-         System.out.println("Erro ao pegar valor total."+ e.getMessage());
-     }
-     jtfQuantidadeTotal.setText(Integer.toString(valorTotal));
-    
-    
- }
-    public void limpar(){
-       jtfQuantidadeTotal.setText("");
-   }
-   private void setIcon() {
-   setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../SapatariaImagens/icone.png")));
-   }
- 
 }
 
 

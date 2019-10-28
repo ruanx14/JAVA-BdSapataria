@@ -1,29 +1,11 @@
 package views;
 
-import models.models.Sapatos;
-import java.awt.Toolkit;
-import javax.swing.JOptionPane;
-import Conexao.Conexao;
+import java.awt.event.ActionListener;
 
-/*
-@Ruan Barroso
-@Aluno do CETAM - Projeto Exercicio Praticos com Bando de Dados
-@ruanx14@gmail.com 
-*/
 
 public class AtualizarSapatos extends javax.swing.JFrame {
-    Sapatos s1 = new Sapatos();
-    Object id;
-    VisualizarSapatos vs = new VisualizarSapatos();
-    Sapatos s2 = new Sapatos();
-    
-    Conexao conecta = new Conexao();
     public AtualizarSapatos() {
         initComponents();
-        //setIcon();   
-        jtfID.setEnabled(false);
-        //jtfQtdEstoque.setText(String.valueOf(mostrarId()));
-       
     }
 
    
@@ -34,7 +16,7 @@ public class AtualizarSapatos extends javax.swing.JFrame {
         jtfValor = new javax.swing.JTextField();
         jtfQtdEstoque = new javax.swing.JTextField();
         jbAtualizarDados = new javax.swing.JButton();
-        jVoltarMenu2 = new javax.swing.JButton();
+        jVoltarMenu = new javax.swing.JButton();
         jcbTamanho = new javax.swing.JComboBox<>();
         jcbMarca = new javax.swing.JComboBox<>();
         jcbGenero = new javax.swing.JComboBox<>();
@@ -50,16 +32,12 @@ public class AtualizarSapatos extends javax.swing.JFrame {
         FUNDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 550));
         setResizable(false);
         getContentPane().setLayout(null);
 
         jtfValor.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jtfValor.setText("00.00");
-        jtfValor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfValorActionPerformed(evt);
-            }
-        });
         getContentPane().add(jtfValor);
         jtfValor.setBounds(359, 379, 116, 35);
 
@@ -70,23 +48,18 @@ public class AtualizarSapatos extends javax.swing.JFrame {
 
         jbAtualizarDados.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jbAtualizarDados.setText("> Atualizar dados <");
-        jbAtualizarDados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAtualizarDadosActionPerformed(evt);
-            }
-        });
         getContentPane().add(jbAtualizarDados);
         jbAtualizarDados.setBounds(287, 425, 241, 37);
 
-        jVoltarMenu2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jVoltarMenu2.setText("> Voltar <");
-        jVoltarMenu2.addActionListener(new java.awt.event.ActionListener() {
+        jVoltarMenu.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jVoltarMenu.setText("> Voltar <");
+        jVoltarMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jVoltarMenu2ActionPerformed(evt);
+                jVoltarMenuActionPerformed(evt);
             }
         });
-        getContentPane().add(jVoltarMenu2);
-        jVoltarMenu2.setBounds(546, 425, 137, 37);
+        getContentPane().add(jVoltarMenu);
+        jVoltarMenu.setBounds(546, 425, 137, 37);
 
         jcbTamanho.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jcbTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "30-31", "32-33", "34-35", "36-37", "38-39", "40-41", "42-43", "44-45" }));
@@ -144,11 +117,6 @@ public class AtualizarSapatos extends javax.swing.JFrame {
 
         jbVerifID.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jbVerifID.setText("Verificar ID");
-        jbVerifID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbVerifIDActionPerformed(evt);
-            }
-        });
         getContentPane().add(jbVerifID);
         jbVerifID.setBounds(118, 426, 163, 34);
 
@@ -160,46 +128,14 @@ public class AtualizarSapatos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jVoltarMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVoltarMenu2ActionPerformed
-        dispose();
-    }//GEN-LAST:event_jVoltarMenu2ActionPerformed
-    public void alterarId(Object id){
-        this.id = id;
+    //
+    public void atualizarSapato(ActionListener evt){
+        jbAtualizarDados.addActionListener(evt);
     }
-    public Object mostrarId(){
-        return id;
-    }
-    private void jtfValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfValorActionPerformed
-       
-    }//GEN-LAST:event_jtfValorActionPerformed
-
-    private void jbAtualizarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarDadosActionPerformed
-      //JOptionPane.showMessageDialog(null,"Id: "+ mostrarId());
-        int id = Integer.parseInt(mostrarId().toString());
-        s1.setTamanho(jcbTamanho.getSelectedItem().toString());
-        s1.setMarca(jcbMarca.getSelectedItem().toString());
-        s1.setValor(Double.parseDouble(jtfValor.getText()));
-        s1.setQtdEstoque(Integer.parseInt(jtfQtdEstoque.getText()));
-        s1.setTipoSapato(jcbTipo.getSelectedItem().toString());
-        s1.setGeneroSapato(jcbGenero.getSelectedItem().toString());
-        s1.setIdSapatos(Integer.parseInt(mostrarId().toString()));
-        if(s1.getQtdEstoque()>0 && s1.getValor()>0){ 
-            s1.updateSelecionado();
-            limpar();
-            dispose();
-            
-            }
     
-     
-    }//GEN-LAST:event_jbAtualizarDadosActionPerformed
-
-    private void jbVerifIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerifIDActionPerformed
-      jtfID.setText(String.valueOf(mostrarId()));
-      int id = Integer.parseInt(mostrarId().toString());
-      verificarDados();
-      
-      
-    }//GEN-LAST:event_jbVerifIDActionPerformed
+    private void jVoltarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVoltarMenuActionPerformed
+        dispose();
+    }//GEN-LAST:event_jVoltarMenuActionPerformed
 
   
     public static void main(String args[]) {
@@ -251,7 +187,7 @@ public class AtualizarSapatos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JButton jVoltarMenu2;
+    private javax.swing.JButton jVoltarMenu;
     private javax.swing.JButton jbAtualizarDados;
     private javax.swing.JButton jbVerifID;
     private javax.swing.JComboBox<String> jcbGenero;
@@ -262,24 +198,5 @@ public class AtualizarSapatos extends javax.swing.JFrame {
     private javax.swing.JTextField jtfQtdEstoque;
     private javax.swing.JTextField jtfValor;
     // End of variables declaration//GEN-END:variables
-    public void limpar(){
-    jtfQtdEstoque.setText("");
-    jtfValor.setText(""); 
-    jtfID.setText("");
-    }
-    private void setIcon() {
-    setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../SapatariaImagens/icone.png")));
-    }
-    
-    public void verificarDados(){
-     s1.setIdSapatos(Integer.parseInt(mostrarId().toString()));
-     s2 = s1.selecionarSapatos(s1);
-     jtfQtdEstoque.setText(String.valueOf(s2.getQtdEstoque()));
-     jtfValor.setText(String.valueOf(s2.getValor()));
-     jcbMarca.setSelectedItem(s2.getMarca());
-     jcbTipo.setSelectedItem(s2.getTipoSapato());
-     jcbTamanho.setSelectedItem(s2.getTamanho());
-     jcbGenero.setSelectedItem(s2.getGeneroSapato());
-    }
-    
+
 }

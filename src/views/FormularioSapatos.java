@@ -1,23 +1,25 @@
 package views;
 
-import models.models.Sapatos;
-import java.awt.Toolkit;
-import javax.swing.JOptionPane;
+import java.awt.event.ActionListener;
 
-/*
-@Ruan Barroso
-@Aluno do CETAM - Projeto Linguagem Programação III
-@ruanx14@gmail.com 
-*/
-public class FormularioSapatos extends javax.swing.JFrame {
-    Sapatos s1 = new Sapatos();
-    
+
+public class FormularioSapatos extends javax.swing.JFrame {   
     public FormularioSapatos() {
         initComponents();
         //setIcon();
     }
-
-   
+    //gets e sets dos campos
+    
+    //funcoes dos actions dos botoes
+    public void jLimpar(ActionListener listener){
+        jbLimpar.addActionListener(listener);
+    }
+    public void jCadastrarSapatos(ActionListener evt){
+        jCadastrarSapatos.addActionListener(evt);
+    }
+    public void jVoltarMenu(ActionListener evt){
+        jVoltarMenu2.addActionListener(evt);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -40,6 +42,7 @@ public class FormularioSapatos extends javax.swing.JFrame {
         fundoSapatos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1067, 600));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -60,21 +63,11 @@ public class FormularioSapatos extends javax.swing.JFrame {
 
         jCadastrarSapatos.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
         jCadastrarSapatos.setText("> Cadastrar Sapato <");
-        jCadastrarSapatos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCadastrarSapatosActionPerformed(evt);
-            }
-        });
         getContentPane().add(jCadastrarSapatos);
         jCadastrarSapatos.setBounds(550, 460, 271, 41);
 
         jVoltarMenu2.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
         jVoltarMenu2.setText("> Voltar <");
-        jVoltarMenu2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jVoltarMenu2ActionPerformed(evt);
-            }
-        });
         getContentPane().add(jVoltarMenu2);
         jVoltarMenu2.setBounds(840, 460, 143, 41);
 
@@ -100,11 +93,6 @@ public class FormularioSapatos extends javax.swing.JFrame {
 
         jbLimpar.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
         jbLimpar.setText("> Limpar < ");
-        jbLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbLimparActionPerformed(evt);
-            }
-        });
         getContentPane().add(jbLimpar);
         jbLimpar.setBounds(380, 460, 161, 41);
 
@@ -146,33 +134,9 @@ public class FormularioSapatos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jVoltarMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVoltarMenu2ActionPerformed
-        BdSapataria bd = new BdSapataria();
-        bd.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jVoltarMenu2ActionPerformed
-
     private void jtfValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfValorActionPerformed
        
     }//GEN-LAST:event_jtfValorActionPerformed
-
-    private void jCadastrarSapatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCadastrarSapatosActionPerformed
-        s1.setTamanho(jcbTamanho.getSelectedItem().toString());
-        s1.setMarca(jcbMarca.getSelectedItem().toString());
-        s1.setValor(Double.parseDouble(jtfValor.getText()));
-        s1.setQtdEstoque(Integer.parseInt(jtfQtdEstoque.getText()));
-        s1.setTipoSapato(jcbTipo.getSelectedItem().toString());
-        s1.setGeneroSapato(jcbGenero.getSelectedItem().toString());
-        if(s1.getQtdEstoque()>0 && s1.getValor()>0){
-            s1.cadastrarSapatos();
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "VALORES INVALIDOS ");
-        }
-    }//GEN-LAST:event_jCadastrarSapatosActionPerformed
-    private void jbLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparActionPerformed
-      limpar();
-    }//GEN-LAST:event_jbLimparActionPerformed
 
   
     public static void main(String args[]) {
@@ -228,11 +192,5 @@ public class FormularioSapatos extends javax.swing.JFrame {
     private javax.swing.JTextField jtfQtdEstoque;
     private javax.swing.JTextField jtfValor;
     // End of variables declaration//GEN-END:variables
-    public void limpar(){
-    jtfQtdEstoque.setText("");
-    jtfValor.setText(""); 
-    }
-    private void setIcon() {
-    setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../SapatariaImagens/icone.png")));
-    }
+
 }

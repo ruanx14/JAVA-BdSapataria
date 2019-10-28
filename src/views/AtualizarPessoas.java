@@ -1,25 +1,13 @@
 package views;
-/*
-@Ruan Barroso
-@Aluno do CETAM - Projeto Linguagem Programação III
-@ruanx14@gmail.com
-*/
-import models.models.Pessoas;
-import java.awt.Toolkit;
-import javax.swing.JOptionPane;
-import javax.swing.text.MaskFormatter;
+
+import java.awt.event.ActionListener;
+
 
 public class AtualizarPessoas extends javax.swing.JFrame {
-    Pessoas p1 = new Pessoas();
-    Pessoas p2 = new Pessoas();
-    String tt;
-    int idCliente;
-    
+
     public AtualizarPessoas() {
         initComponents();
-        //setIcon();
-        jtfID.setText(String.valueOf(idCliente));
-        jtfID.setEnabled(false);
+      
     }
 
     
@@ -29,8 +17,8 @@ public class AtualizarPessoas extends javax.swing.JFrame {
 
         jtfNome = new javax.swing.JTextField();
         jtfBairro = new javax.swing.JTextField();
-        jCadastrarPessoa = new javax.swing.JButton();
-        jVoltarMenu = new javax.swing.JButton();
+        jbCadastrarPessoa = new javax.swing.JButton();
+        jbVoltarMenu = new javax.swing.JButton();
         jcbEstado = new javax.swing.JComboBox<>();
         jcbGeneros = new javax.swing.JComboBox<>();
         jlNome = new javax.swing.JLabel();
@@ -49,16 +37,12 @@ public class AtualizarPessoas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 153));
+        setPreferredSize(new java.awt.Dimension(800, 550));
         setResizable(false);
         getContentPane().setLayout(null);
 
         jtfNome.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jtfNome.setToolTipText("");
-        jtfNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfNomeActionPerformed(evt);
-            }
-        });
         getContentPane().add(jtfNome);
         jtfNome.setBounds(143, 81, 568, 40);
 
@@ -66,35 +50,25 @@ public class AtualizarPessoas extends javax.swing.JFrame {
         getContentPane().add(jtfBairro);
         jtfBairro.setBounds(142, 252, 571, 40);
 
-        jCadastrarPessoa.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jCadastrarPessoa.setText("> Atualizar dados < ");
-        jCadastrarPessoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jCadastrarPessoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCadastrarPessoaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jCadastrarPessoa);
-        jCadastrarPessoa.setBounds(370, 430, 247, 37);
+        jbCadastrarPessoa.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jbCadastrarPessoa.setText("> Atualizar dados < ");
+        jbCadastrarPessoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(jbCadastrarPessoa);
+        jbCadastrarPessoa.setBounds(370, 430, 247, 37);
 
-        jVoltarMenu.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jVoltarMenu.setText("> Voltar < ");
-        jVoltarMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jVoltarMenu.addActionListener(new java.awt.event.ActionListener() {
+        jbVoltarMenu.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jbVoltarMenu.setText("> Voltar < ");
+        jbVoltarMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbVoltarMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jVoltarMenuActionPerformed(evt);
+                jbVoltarMenuActionPerformed(evt);
             }
         });
-        getContentPane().add(jVoltarMenu);
-        jVoltarMenu.setBounds(620, 430, 143, 37);
+        getContentPane().add(jbVoltarMenu);
+        jbVoltarMenu.setBounds(620, 430, 143, 37);
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "SP", "RJ", "SC", "MT", "MS", "PA", "AP", "RO", "AC", "RM", "BA", "PE", "PI", "SE", "MA", " ", " " }));
-        jcbEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbEstadoActionPerformed(evt);
-            }
-        });
         getContentPane().add(jcbEstado);
         jcbEstado.setBounds(482, 374, 143, 35);
 
@@ -140,11 +114,6 @@ public class AtualizarPessoas extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jftTelefone.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jftTelefone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jftTelefoneActionPerformed(evt);
-            }
-        });
         getContentPane().add(jftTelefone);
         jftTelefone.setBounds(143, 139, 568, 40);
 
@@ -158,12 +127,7 @@ public class AtualizarPessoas extends javax.swing.JFrame {
         jftCpf.setBounds(143, 200, 571, 40);
 
         jbVerificarID.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jbVerificarID.setText("VERIFICAR ID");
-        jbVerificarID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbVerificarIDActionPerformed(evt);
-            }
-        });
+        jbVerificarID.setText("Verificar ID");
         getContentPane().add(jbVerificarID);
         jbVerificarID.setBounds(170, 430, 190, 37);
 
@@ -188,51 +152,14 @@ public class AtualizarPessoas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNomeActionPerformed
-        
-    }//GEN-LAST:event_jtfNomeActionPerformed
-
-    private void jVoltarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVoltarMenuActionPerformed
+    //
+    public void atualizarPessoa(ActionListener evt){
+        jbCadastrarPessoa.addActionListener(evt);
+    }
+    
+    private void jbVoltarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVoltarMenuActionPerformed
         dispose();
-       
-    }//GEN-LAST:event_jVoltarMenuActionPerformed
-
-    private void jCadastrarPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCadastrarPessoaActionPerformed
-      p1.setIdPessoas(getIdCliente());
-      p1.setNome(jtfNome.getText());
-      p1.setBairro(jtfBairro.getText());
-      p1.setRua(jtfRua.getText());
-      p1.setCpf(jftCpf.getText());
-      p1.setGenero(jcbGeneros.getSelectedItem().toString());
-      p1.setTelefone(jftTelefone.getText());
-      p1.setEstado(jcbEstado.getSelectedItem().toString());
-      if((jftCpf.getText().length()>14)&&(jftCpf.getText().length()<14)){
-            JOptionPane.showMessageDialog(null,"Dados Invalidos");
-      }
-      else{
-          if((jtfNome.getText().length()<1)||(jtfBairro.getText().length()<1)||(jtfRua.getText().length()<1)){
-           JOptionPane.showMessageDialog(null,"Dados não inseridos para atualização");
-           limpar(); 
-           dispose();
-          }else{
-              p1.updateSelecionado();
-              limpar();
-              dispose();
-          }
-           }
-    }//GEN-LAST:event_jCadastrarPessoaActionPerformed
-
-    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
-       
-    }//GEN-LAST:event_jcbEstadoActionPerformed
-
-    private void jftTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jftTelefoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jftTelefoneActionPerformed
-
-    private void jbVerificarIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerificarIDActionPerformed
-       verificarDados();
-    }//GEN-LAST:event_jbVerificarIDActionPerformed
+    }//GEN-LAST:event_jbVoltarMenuActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -268,10 +195,10 @@ public class AtualizarPessoas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jCadastrarPessoa;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JButton jVoltarMenu;
+    private javax.swing.JButton jbCadastrarPessoa;
     private javax.swing.JButton jbVerificarID;
+    private javax.swing.JButton jbVoltarMenu;
     private javax.swing.JComboBox<String> jcbEstado;
     private javax.swing.JComboBox<String> jcbGeneros;
     private javax.swing.JFormattedTextField jftCpf;
@@ -289,34 +216,5 @@ public class AtualizarPessoas extends javax.swing.JFrame {
     private javax.swing.JTextField jtfRua;
     // End of variables declaration//GEN-END:variables
 
-    public void limpar(){
-    jftCpf.setText("");
-    jtfBairro.setText("");
-    jtfRua.setText("");
-    jtfNome.setText("");
-    jftTelefone.setText("");
-    jtfID.setText("");
-    }
-    private void setIcon() {
-    setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../SapatariaImagens/icone.png")));
-    } 
-    public void setIdCliente(int id){
-        this.idCliente = id;
-    }
-    public int getIdCliente(){
-        return idCliente;
-    }
-    public void verificarDados(){
-       p1.setIdPessoas(getIdCliente());
-       p2 = p1.selecionarPessoasPeloId(p1);
-       jtfID.setText(String.valueOf(getIdCliente()));
-       jftCpf.setText(p2.getCpf());
-       jtfBairro.setText(p2.getBairro());
-       jtfRua.setText(p2.getRua());
-       jtfNome.setText(String.valueOf(p2.getNome()));
-       jftTelefone.setText(p2.getTelefone());
-       jcbEstado.setSelectedItem(p2.getEstado());
-       jcbGeneros.setSelectedItem(p2.getGenero());
-       
-    }
+    
 }
