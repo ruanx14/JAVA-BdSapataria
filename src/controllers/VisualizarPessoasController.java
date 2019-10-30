@@ -36,7 +36,18 @@ public class VisualizarPessoasController {
     }
     private class JAlterarDados implements ActionListener{
         public void actionPerformed(ActionEvent ae) {
-            new AtualizarPessoasController(new AtualizarPessoas());
+            Pessoas pessoabean = new Pessoas();
+            Vector<Pessoas> pessoaClicada = pessoa.pesquisarPessoas("Select * from pessoas where idPessoas="+view.objClicado());
+            for(Pessoas pessoa : pessoaClicada){
+                pessoabean.setBairro(pessoa.getBairro());
+                pessoabean.setTelefone(pessoa.getTelefone());
+                pessoabean.setCpf(pessoa.getCpf());
+                pessoabean.setNome(pessoa.getNome());
+                pessoabean.setGenero(pessoa.getGenero());
+                pessoabean.setEstado(pessoa.getEstado());
+                pessoabean.setRua(pessoa.getRua());
+            }
+            new AtualizarPessoasController(new AtualizarPessoas(),pessoabean);   
         } 
     }
     private class JExibirTodos implements ActionListener{

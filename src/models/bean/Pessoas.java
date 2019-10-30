@@ -15,7 +15,7 @@ private String rua;
 private String cpf;
 private String estado;
 
-   
+ 
     public void setRua(String rua){
         this.rua = rua;
     }
@@ -59,6 +59,7 @@ private String estado;
           this.cpf = cpf;  
     }
     }
+    
     public String getEstado() {
         return estado;
     }

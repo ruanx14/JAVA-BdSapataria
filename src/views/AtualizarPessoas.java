@@ -29,8 +29,6 @@ public class AtualizarPessoas extends javax.swing.JFrame {
         jlEstado = new javax.swing.JLabel();
         jftTelefone = new javax.swing.JFormattedTextField();
         jftCpf = new javax.swing.JFormattedTextField();
-        jbVerificarID = new javax.swing.JButton();
-        jtfID = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jtfRua = new javax.swing.JTextField();
         jlFundo = new javax.swing.JLabel();
@@ -126,15 +124,6 @@ public class AtualizarPessoas extends javax.swing.JFrame {
         getContentPane().add(jftCpf);
         jftCpf.setBounds(143, 200, 571, 40);
 
-        jbVerificarID.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jbVerificarID.setText("Verificar ID");
-        getContentPane().add(jbVerificarID);
-        jbVerificarID.setBounds(170, 430, 190, 37);
-
-        jtfID.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        getContentPane().add(jtfID);
-        jtfID.setBounds(70, 430, 90, 35);
-
         jLabel3.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel3.setText("Rua: ");
         getContentPane().add(jLabel3);
@@ -152,7 +141,52 @@ public class AtualizarPessoas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //
+    
+    public String getTelefone(){
+        return jftTelefone.getText();
+    }
+    public String getCpf(){
+        return jftCpf.getText();
+    }
+    public String getEstado(){
+        return String.valueOf(jcbEstado.getSelectedItem());
+    }
+    public String getGenero(){
+        return String.valueOf(jcbGeneros.getSelectedItem());
+    }
+    public String getJtfNome(){
+        return jtfNome.getText();
+    }
+    public String getJtfBairro(){
+        return jtfBairro.getText();
+    }
+    public String getJtfRua(){
+        return jtfRua.getText();
+    }
+    
+    public void setJtfNome(String nome){
+        jtfNome.setText(nome);
+    }
+    public void setJtfBairro(String bairro){
+        jtfBairro.setText(bairro);
+    }
+    public void setJtfRua(String rua){
+        jtfRua.setText(rua);
+    }
+     public void setJtfTelefone(String telefone){
+        jftTelefone.setText(telefone);
+    }
+    public void setJtfCpf(String cpf){
+        jftCpf.setText(cpf);
+    }
+    public void setJcbGenero(String genero){
+        //jcbGeneros.
+    }
+    public void setJcbEstado(String estado){
+        //jcbGeneros.
+    }
+    
+   //
     public void atualizarPessoa(ActionListener evt){
         jbCadastrarPessoa.addActionListener(evt);
     }
@@ -197,7 +231,6 @@ public class AtualizarPessoas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton jbCadastrarPessoa;
-    private javax.swing.JButton jbVerificarID;
     private javax.swing.JButton jbVoltarMenu;
     private javax.swing.JComboBox<String> jcbEstado;
     private javax.swing.JComboBox<String> jcbGeneros;
@@ -211,7 +244,6 @@ public class AtualizarPessoas extends javax.swing.JFrame {
     private javax.swing.JLabel jlNome;
     private javax.swing.JLabel jlTelefone;
     private javax.swing.JTextField jtfBairro;
-    private javax.swing.JTextField jtfID;
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfRua;
     // End of variables declaration//GEN-END:variables

@@ -8,10 +8,31 @@ import java.util.Vector;
 
 import models.bean.Pessoas;
 import conexao.Conexao;
+import javax.swing.JOptionPane;
 
 public class PessoaDAO {
     Conexao conexao = new Conexao();
-    
+    public void adicionarPessoa(Pessoas pessoa){
+        Connection conn = conexao.conectar();
+        try{
+        PreparedStatement pst = conn.prepareStatement("Insert into pessoas(nome, telefone, bairro, rua, genero, CPF, estado) values (?,?,?,?,?,?,?)");
+        pst.setString(1,pessoa.getNome());
+        pst.setString(2,pessoa.getTelefone());
+        pst.setString(3,pessoa.getBairro());
+        pst.setString(4,pessoa.getRua());
+        pst.setString(5,pessoa.getGenero());
+        pst.setString(6,pessoa.getCpf());
+        pst.setString(7,pessoa.getEstado());
+        if(pst.execute()){
+            JOptionPane.showMessageDialog(null,"Cliente não foi inserido!");
+        }else{
+            JOptionPane.showMessageDialog(null,"Cliente Inserido com sucesso!");
+        }
+        }catch(SQLException ex){
+            System.out.println("Erro:"+ex.getMessage());
+        }
+        conexao.fechar();
+    }
     public Vector pesquisarPessoas(String sql){
         Connection conn = conexao.conectar();
         Vector todasPessoas = new Vector();
@@ -28,12 +49,14 @@ public class PessoaDAO {
                      pessoa.setGenero(rs.getString("genero"));
                      pessoa.setCpf(rs.getString("CPF"));
                      pessoa.setTelefone(rs.getString("telefone"));
+                     pessoa.setRua(rs.getString("rua"));
                      todasPessoas.add(pessoa);
                     }while(rs.next());
                 } 
             }catch(SQLException ex){
                 System.out.println("Erro no pesquisarPessoas: "+ex.getMessage());
             }
+        conexao.fechar();
         return todasPessoas;
     }
     

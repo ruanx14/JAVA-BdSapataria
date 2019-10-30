@@ -2,9 +2,10 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import controllers.BdSapatariaController;
 import views.BdSapataria;
 import views.FormularioPessoas;
+import models.bean.Pessoas;
+import models.dao.PessoaDAO;
 
 
 public class FormularioPessoasController {
@@ -16,13 +17,22 @@ public class FormularioPessoasController {
         this.telaView.jCadastrarPessoa(new JCadastrarPessoa());
         this.telaView.jLimpar(new JLimpar());
         this.telaView.jVoltarMenu(new JVoltarMenu());
-        //
         this.telaView.setVisible(true);
     }
     
     private class JCadastrarPessoa implements ActionListener{
         public void actionPerformed(ActionEvent ae) {
-              //chamar model para cadastrar. 
+              Pessoas pessoa = new Pessoas();
+              pessoa.setNome(telaView.getJtfNome());
+              pessoa.setCpf(telaView.getCpf());
+              pessoa.setBairro(telaView.getJtfBairro());
+              pessoa.setEstado(telaView.getEstado());
+              pessoa.setGenero(telaView.getGenero());
+              pessoa.setTelefone(telaView.getTelefone());
+              pessoa.setRua(telaView.getJtfRua());
+              //validacoes;
+              PessoaDAO pessoadao = new PessoaDAO();
+              pessoadao.adicionarPessoa(pessoa);
         }
     }
     private class JLimpar implements ActionListener{
@@ -30,8 +40,8 @@ public class FormularioPessoasController {
            telaView.setJtfBairro("");
            telaView.setJtfNome("");
            telaView.setJtfRua("");
-           //Cpf
-           //Telefone}
+           telaView.setJtfCpf("");
+           telaView.setJtfTelefone("");
         }   
     }
     private class JVoltarMenu implements ActionListener{

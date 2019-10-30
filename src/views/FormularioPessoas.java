@@ -8,6 +8,18 @@ public class FormularioPessoas extends javax.swing.JFrame {
     public FormularioPessoas() {
         initComponents();
     }
+    public String getTelefone(){
+        return jftTelefone.getText();
+    }
+    public String getCpf(){
+        return jftCpf.getText();
+    }
+    public String getEstado(){
+        return String.valueOf(jcbEstado.getSelectedItem());
+    }
+    public String getGenero(){
+        return String.valueOf(jcbGeneros.getSelectedItem());
+    }
     public String getJtfNome(){
         return jtfNome.getText();
     }
@@ -17,6 +29,7 @@ public class FormularioPessoas extends javax.swing.JFrame {
     public String getJtfRua(){
         return jtfRua.getText();
     }
+    //No need 
     public void setJtfNome(String nome){
         jtfNome.setText(nome);
     }
@@ -26,7 +39,15 @@ public class FormularioPessoas extends javax.swing.JFrame {
     public void setJtfRua(String rua){
         jtfRua.setText(rua);
     }
-    //Falta combo box estado, genero, || mask camp cpf e numero
+     public void setJtfTelefone(String telefone){
+        jftTelefone.setText(telefone);
+    }
+    public void setJtfCpf(String cpf){
+        jftCpf.setText(cpf);
+    }
+ 
+    
+    
     
     //Criando métodos para serem chamados no controller e atribuindo as actionlistener aos botoes das views.
     public void jCadastrarPessoa(ActionListener evt){

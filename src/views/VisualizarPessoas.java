@@ -44,6 +44,10 @@ public class VisualizarPessoas extends javax.swing.JFrame {
     public void jPorCPF(ActionListener evt){
         jbCPF.addActionListener(evt);
     }
+    public String objClicado(){
+        Object clicado = jtVendas.getValueAt(jtVendas.getSelectedRow(),0);
+        return String.valueOf(clicado);
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

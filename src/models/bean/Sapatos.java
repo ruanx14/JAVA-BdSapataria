@@ -18,6 +18,14 @@ public class Sapatos {
         this.qtdEstoque = qtdEstoque;
         valor = valorSapato;
     }
+    public Sapatos(String tamanho, String marca, String generoSapato, String tipoSapato, int qtdEstoque, double valor){
+        this.tamanho = tamanho;
+        this.marca = marca;
+        this.generoSapato = generoSapato;
+        this.tipoSapato = tipoSapato;
+        this.qtdEstoque = qtdEstoque;
+        this.valor = valor;
+    }
     public String getTipoSapato() {
         return tipoSapato;
     }

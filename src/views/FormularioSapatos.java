@@ -8,8 +8,30 @@ public class FormularioSapatos extends javax.swing.JFrame {
         initComponents();
         //setIcon();
     }
-    //gets e sets dos campos
-    
+    public String getMarca(){
+        return String.valueOf(jcbMarca.getSelectedItem());
+    }
+    public String getTipo(){
+        return String.valueOf(jcbTipo.getSelectedItem());
+    }
+    public String getTamanho(){
+        return String.valueOf(jcbTamanho.getSelectedItem());
+    }
+    public String getGenero(){
+        return String.valueOf(jcbGenero.getSelectedItem());
+    }
+    public int getQtdEstoque(){
+        return Integer.parseInt(jtfQtdEstoque.getText());
+    }
+    public double getValor(){
+        return Double.parseDouble(jtfValor.getText());
+    }
+    public void setValor(String valor){
+        jtfValor.setText(valor);
+    }
+    public void setQtdEstoque(String qtd){
+        jtfQtdEstoque.setText(qtd);
+    }
     //funcoes dos actions dos botoes
     public void jLimpar(ActionListener listener){
         jbLimpar.addActionListener(listener);
