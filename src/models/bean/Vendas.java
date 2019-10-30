@@ -4,13 +4,17 @@ public class Vendas {
      private int idVendas;
      private int idSapatos;
      private int idPessoas;
+     
      private String cpf;
      private String dataVenda;
      private String formaPagamento;
+     
      private double total;
      private int qtdPedido;
      
-
+    public Vendas(){
+        
+    }
     public void setQtdPedido(int qtdPedido){
         this.qtdPedido = qtdPedido;
     }

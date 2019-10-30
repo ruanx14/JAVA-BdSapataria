@@ -1,3 +1,4 @@
+package models.bean;
 /*
 @Ruan Barroso
 @Alunos do CETAM - Projeto Exercicio Pratico - Banco de dados III
@@ -14,6 +15,7 @@ private String rua;
 private String cpf;
 private String estado;
 
+   
     public void setRua(String rua){
         this.rua = rua;
     }

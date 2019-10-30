@@ -1,12 +1,31 @@
 package views;
 
 import java.awt.event.ActionListener;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 
 public class VisualizarVendas extends javax.swing.JFrame {
    
     public VisualizarVendas() {
-        initComponents();        
+        initComponents();    
+        jtfQuantidadeTotal.setEnabled(false);
+    }
+    public void setAlterarQuantidade(int qtd){
+        jtfQuantidadeTotal.setText(String.valueOf(qtd));
+    }
+    public String getIdVenda(){
+        return jtfSapato.getText();
+    }
+    public String getDataVenda(){
+        return jtfDataVenda.getText();
+    }
+    public String getNomeTipo(){
+        return jtfOutros.getText();
+    }
+    public void setAlterarTabela(Vector linhas, Vector colunas){
+        DefaultTableModel modelo = new DefaultTableModel(linhas,colunas);
+        jtVendas.setModel(modelo);
     }
     public void jVoltarMenu(ActionListener evt){
         jbVoltar.addActionListener(evt);

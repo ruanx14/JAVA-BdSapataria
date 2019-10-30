@@ -1,14 +1,31 @@
 package views;
 
 import java.awt.event.ActionListener;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 public class VisualizarPessoas extends javax.swing.JFrame {
 
     public VisualizarPessoas() {
         initComponents();
-        
+        jtfQuantidadeTotal.setEnabled(false);
     }
-    //
+    public String getCpf(){
+        return jftCpf.getText();
+    }
+    public String getIdPessoa(){
+        return jtfSapato.getText();
+    }
+    public String getNomeCliente(){
+        return jtfOutros.getText();
+    }
+    public void setQuantidadeTotal(int total){
+        jtfQuantidadeTotal.setText(String.valueOf(total));
+    }
+    public void alterarTabela(Vector linhas,Vector colunas){
+        DefaultTableModel modelo = new DefaultTableModel(linhas,colunas);
+        jtVendas.setModel(modelo);
+    }
     public void jVoltarMenu(ActionListener evt){
         jbVoltar.addActionListener(evt);
     }
@@ -47,11 +64,12 @@ public class VisualizarPessoas extends javax.swing.JFrame {
         jbProcurarTudo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jbCPF = new javax.swing.JButton();
-        jftfCpf = new javax.swing.JFormattedTextField();
+        jftCpf = new javax.swing.JFormattedTextField();
         FUNDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1149, 625));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jtfQuantidadeTotal.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
@@ -133,12 +151,12 @@ public class VisualizarPessoas extends javax.swing.JFrame {
         jbCPF.setBounds(1026, 11, 103, 27);
 
         try {
-            jftfCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            jftCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        getContentPane().add(jftfCpf);
-        jftfCpf.setBounds(880, 10, 140, 20);
+        getContentPane().add(jftCpf);
+        jftCpf.setBounds(880, 10, 140, 20);
 
         FUNDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/fundoVisualizarAll.png"))); // NOI18N
         FUNDO.setMaximumSize(new java.awt.Dimension(1120, 800));
@@ -167,7 +185,7 @@ public class VisualizarPessoas extends javax.swing.JFrame {
     private javax.swing.JButton jbProcurarTudo;
     private javax.swing.JButton jbSapato;
     private javax.swing.JButton jbVoltar;
-    private javax.swing.JFormattedTextField jftfCpf;
+    private javax.swing.JFormattedTextField jftCpf;
     private javax.swing.JLabel jlNada;
     private javax.swing.JLabel jlSapato;
     private javax.swing.JTable jtVendas;

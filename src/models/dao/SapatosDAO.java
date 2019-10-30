@@ -1,79 +1,59 @@
 package models.dao;
 
-public class SapatosDAO {
-    /*
-    
-public void cadastrarSapatos(){
-   conecta.abrirBdcon();
-   try{
-       PreparedStatement pst = conecta.con.prepareStatement("insert into sapatos (tamanho,marca,valor,qtdEstoque,generoSapato,tipoSapato) values (?,?,?,?,?,?)");
-       pst.setString(1,getTamanho());
-       pst.setString(2,getMarca());
-       pst.setDouble(3,getValor());
-       pst.setInt(4,getQtdEstoque());
-       pst.setString(5,getGeneroSapato());
-       pst.setString(6,getTipoSapato());
-       pst.execute();
-       JOptionPane.showMessageDialog(null, "Cadastro de sapato concluído");
-   }
-   catch(SQLException ex){
-       System.out.println("Erro: "+ ex.getMessage());
-       JOptionPane.showMessageDialog(null, "Falha: "+ ex.getMessage());
-   }
-   conecta.fecharBdcon();        
-}
+import conexao.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+import models.bean.Sapatos;
 
-public Sapatos selecionarSapatos(Sapatos p3){
-        conecta.abrirBdcon();
-        try {
-            String sql = "select * from sapatos where idSapatos =?";
-            PreparedStatement pstm = conecta.con.prepareStatement(sql);
-	    pstm.setInt(1, p3.getIdSapatos());
-            ResultSet rs = pstm.executeQuery();
-            if(rs.next()){
+public class SapatosDAO {
+    Conexao conexao = new Conexao();
+    
+    
+    public Vector pesquisarSapatos(String sql){
+        Connection conn = conexao.conectar();
+        Vector pesquisas = new Vector();
+        try{
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+        if(rs.next()){
             do{
-                 p3.setTipoSapato(rs.getString("tipoSapato"));
-                 p3.setValor(rs.getDouble("valor"));
-                 p3.setIdSapatos(rs.getInt("idSapatos"));
-                 p3.setTamanho(rs.getString("tamanho"));
-                 p3.setMarca(rs.getString("marca"));
-                 p3.setGeneroSapato(rs.getString("generoSapato"));
-                 p3.setQtdEstoque(rs.getInt("qtdEstoque"));
-              }while (rs.next());
-            }else{
-                 p3.setValor(0);
-                 p3.setQtdEstoque(0);
-                 JOptionPane.showMessageDialog(null, "NÃO EXISTE REFÊRENCIA DE DADO NA TABELA");
-               
-            }  
-        rs.close();
-        pstm.close();
-        }catch (SQLException ex){    
-            System.out.println("Erro ao procurar valor: "+ex.getMessage());
-            JOptionPane.showMessageDialog(null, "NÃO EXISTE REFÊRENCIA DE DADO NA TABELA");
+            Sapatos sapatos = new Sapatos(
+               rs.getInt("idSapatos"),
+               rs.getString("tamanho"),
+               rs.getString("marca"),
+               rs.getString("tipoSapato"),
+               rs.getString("generoSapato"),
+               rs.getInt("qtdEstoque"),
+               rs.getDouble("valor")
+            );
+                System.out.println(rs.getString("marca"));
+            pesquisas.add(sapatos);    
+            }while(rs.next());
         }
-       conecta.fecharBdcon();
-       return p3;
-}     
-    public void updateSelecionado(){
-    conecta.abrirBdcon();
-    try{
-        PreparedStatement pst = conecta.con.prepareStatement("update sapatos set tipoSapato=?,tamanho=?,qtdEstoque=?,marca=?,generoSapato=?,valor=? where idSapatos=?");
-        pst.setString(1,getTipoSapato());
-        pst.setString(2,getTamanho());
-        pst.setInt(3,getQtdEstoque());
-        pst.setString(4,getMarca());
-        pst.setString(5,getGeneroSapato());
-        pst.setDouble(6,getValor());
-        pst.setInt(7,getIdSapatos());
-        pst.executeUpdate();
-        JOptionPane.showMessageDialog(null,"Atualizaçao de dados do sapato concluida!");
-    }catch(SQLException ex){
-        System.out.println("Erro: "+ ex.getMessage());
+        }catch(SQLException ex){
+            System.out.println("Erro no procurar sapatos "+ex.getMessage());
+        }
+        conexao.fechar();
+        return pesquisas;
     }
-    conecta.fecharBdcon();
+    
+    public int pesquisarSapatosTotal(String sql){
+        Connection conn = conexao.conectar();
+        int numero = 0;
+        try{
+        PreparedStatement pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        if(rs.next()){    
+            numero = rs.getInt("count(*)");
+        }
+        }catch(SQLException ex){
+            System.out.println("Erro no procurar sapatos "+ex.getMessage());
+        }
+        conexao.fechar();
+        return numero;
     }
- 
-}
-    */
+    
 }

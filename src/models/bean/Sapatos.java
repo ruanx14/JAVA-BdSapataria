@@ -9,6 +9,15 @@ public class Sapatos {
     private String generoSapato;
     private String tipoSapato;
     
+    public Sapatos(int idSapatos,String tamanho, String marca, String tipoSapato, String generoSapato, int qtdEstoque, double valorSapato){
+        this.idSapatos = idSapatos;
+        this.tamanho = tamanho;
+        this.marca = marca;
+        this.tipoSapato = tipoSapato;
+        this.generoSapato = generoSapato;
+        this.qtdEstoque = qtdEstoque;
+        valor = valorSapato;
+    }
     public String getTipoSapato() {
         return tipoSapato;
     }

@@ -1,12 +1,15 @@
 package views;
 
 import java.awt.event.ActionListener;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 
 public class VisualizarSapatos extends javax.swing.JFrame {
    
     public VisualizarSapatos() {
-        initComponents();        
+        initComponents();  
+        jtfQuantidadeTotal.setEnabled(false);
     }
 
    
@@ -108,8 +111,19 @@ public class VisualizarSapatos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-   
-    
+    public String getIdSapato(){
+        return jtfSapato.getText();
+    }       
+    public String getMarcaTipo(){
+        return jtfOutros.getText();
+    }
+    public void setQuantidadeTotal(int qtd){
+        jtfQuantidadeTotal.setText(String.valueOf(qtd));
+    }
+    public void setAlterarTabela(Vector linhas, Vector colunas){
+        DefaultTableModel modelo = new DefaultTableModel(linhas,colunas);
+        jtVendas.setModel(modelo);
+    }
      public void jVoltarMenu(ActionListener evt){
         jbVoltar.addActionListener(evt);
     }
