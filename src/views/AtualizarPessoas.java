@@ -134,7 +134,7 @@ public class AtualizarPessoas extends javax.swing.JFrame {
         jtfRua.setBounds(142, 310, 571, 40);
 
         jlFundo.setFont(new java.awt.Font("Lucida Sans", 1, 36)); // NOI18N
-        jlFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/fundosAlterarPessoas.png"))); // NOI18N
+        jlFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundosAlterarPessoas.png"))); // NOI18N
         getContentPane().add(jlFundo);
         jlFundo.setBounds(0, -20, 890, 570);
 

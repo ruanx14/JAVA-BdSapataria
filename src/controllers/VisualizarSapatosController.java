@@ -32,7 +32,19 @@ public class VisualizarSapatosController {
     }
     private class JAlterarDados implements ActionListener{
         public void actionPerformed(ActionEvent ae) {
-            new AtualizarSapatosController(new AtualizarSapatos());
+            SapatosDAO sapatoModel =  new SapatosDAO();
+            Sapatos sapatobean = new Sapatos();
+            Vector<Sapatos> sapatos = sapatoModel.pesquisarSapatos("select * from sapatos where idSapatos="+view.objClicado());
+            for(Sapatos sapato : sapatos){
+                   sapatobean.setIdSapatos(sapato.getIdSapatos());
+                   sapatobean.setGeneroSapato(sapato.getGeneroSapato());
+                   sapatobean.setTamanho(sapato.getTamanho());
+                   sapatobean.setTipoSapato(sapato.getTipoSapato());
+                   sapatobean.setMarca(sapato.getMarca());
+                   sapatobean.setQtdEstoque(sapato.getQtdEstoque());
+                   sapatobean.setValor(sapato.getValor());
+            }
+            new AtualizarSapatosController(new AtualizarSapatos(), sapatobean);      
         } 
     }
     private class JExibirTodos implements ActionListener{

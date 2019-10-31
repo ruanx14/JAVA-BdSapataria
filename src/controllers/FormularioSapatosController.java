@@ -21,8 +21,8 @@ public class FormularioSapatosController {
             Sapatos sapato = new Sapatos(
             view.getTamanho(),
             view.getMarca(),
-            view.getGenero(),
             view.getTipo(),
+            view.getGenero(),
             view.getQtdEstoque(),
             view.getValor()
             );

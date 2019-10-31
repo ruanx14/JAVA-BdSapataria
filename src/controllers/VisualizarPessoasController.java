@@ -39,6 +39,7 @@ public class VisualizarPessoasController {
             Pessoas pessoabean = new Pessoas();
             Vector<Pessoas> pessoaClicada = pessoa.pesquisarPessoas("Select * from pessoas where idPessoas="+view.objClicado());
             for(Pessoas pessoa : pessoaClicada){
+                pessoabean.setIdPessoas(pessoa.getIdPessoas());
                 pessoabean.setBairro(pessoa.getBairro());
                 pessoabean.setTelefone(pessoa.getTelefone());
                 pessoabean.setCpf(pessoa.getCpf());

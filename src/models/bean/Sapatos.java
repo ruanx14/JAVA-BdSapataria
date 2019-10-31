@@ -9,6 +9,9 @@ public class Sapatos {
     private String generoSapato;
     private String tipoSapato;
     
+    public Sapatos(){
+        
+    }
     public Sapatos(int idSapatos,String tamanho, String marca, String tipoSapato, String generoSapato, int qtdEstoque, double valorSapato){
         this.idSapatos = idSapatos;
         this.tamanho = tamanho;
@@ -18,7 +21,7 @@ public class Sapatos {
         this.qtdEstoque = qtdEstoque;
         valor = valorSapato;
     }
-    public Sapatos(String tamanho, String marca, String generoSapato, String tipoSapato, int qtdEstoque, double valor){
+    public Sapatos(String tamanho,String marca,String tipoSapato, String generoSapato, int qtdEstoque, double valor){
         this.tamanho = tamanho;
         this.marca = marca;
         this.generoSapato = generoSapato;

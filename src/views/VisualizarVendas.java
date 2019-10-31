@@ -151,7 +151,7 @@ public class VisualizarVendas extends javax.swing.JFrame {
         getContentPane().add(jtfDataVenda);
         jtfDataVenda.setBounds(876, 12, 96, 20);
 
-        jlFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/fundoVisualizarAll.png"))); // NOI18N
+        jlFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundoVisualizarAll.png"))); // NOI18N
         jlFundo.setPreferredSize(new java.awt.Dimension(1110, 610));
         getContentPane().add(jlFundo);
         jlFundo.setBounds(0, 0, 1120, 600);

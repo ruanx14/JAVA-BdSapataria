@@ -162,7 +162,7 @@ public class VisualizarPessoas extends javax.swing.JFrame {
         getContentPane().add(jftCpf);
         jftCpf.setBounds(880, 10, 140, 20);
 
-        FUNDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/fundoVisualizarAll.png"))); // NOI18N
+        FUNDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundoVisualizarAll.png"))); // NOI18N
         FUNDO.setMaximumSize(new java.awt.Dimension(1120, 800));
         getContentPane().add(FUNDO);
         FUNDO.setBounds(-30, -30, 2420, 640);

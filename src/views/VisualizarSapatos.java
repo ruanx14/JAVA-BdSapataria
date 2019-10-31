@@ -105,12 +105,15 @@ public class VisualizarSapatos extends javax.swing.JFrame {
         getContentPane().add(jbProcurarTudo);
         jbProcurarTudo.setBounds(686, 11, 93, 27);
 
-        FUNDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/fundoVisualizarAll.png"))); // NOI18N
+        FUNDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundoVisualizarAll.png"))); // NOI18N
         getContentPane().add(FUNDO);
         FUNDO.setBounds(0, -10, 1100, 640);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public String objClicado(){
+        return String.valueOf(jtVendas.getValueAt(jtVendas.getSelectedRow(), 0));
+    }
     public String getIdSapato(){
         return jtfSapato.getText();
     }       

@@ -27,8 +27,6 @@ public class AtualizarSapatos extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jtfID = new javax.swing.JTextField();
-        jbVerifID = new javax.swing.JButton();
         FUNDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -111,17 +109,8 @@ public class AtualizarSapatos extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(35, 382, 193, 29);
 
-        jtfID.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        getContentPane().add(jtfID);
-        jtfID.setBounds(35, 425, 77, 33);
-
-        jbVerifID.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jbVerifID.setText("Verificar ID");
-        getContentPane().add(jbVerifID);
-        jbVerifID.setBounds(118, 426, 163, 34);
-
         FUNDO.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
-        FUNDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/fundosAlterarSapatos.png"))); // NOI18N
+        FUNDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundosAlterarSapatos.png"))); // NOI18N
         getContentPane().add(FUNDO);
         FUNDO.setBounds(0, 0, 840, 520);
 
@@ -129,6 +118,45 @@ public class AtualizarSapatos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //
+    //gets
+    public String getMarca(){
+        return String.valueOf(jcbMarca.getSelectedItem());
+    }
+    public String getTipo(){
+        return String.valueOf(jcbTipo.getSelectedItem());
+    }
+    public String getTamanho(){
+        return String.valueOf(jcbTamanho.getSelectedItem());
+    }
+    public String getGenero(){
+        return String.valueOf(jcbGenero.getSelectedItem());
+    }
+    public int getQtdEstoque(){
+        return Integer.parseInt(jtfQtdEstoque.getText());
+    }
+    public double getValor(){
+        return Double.parseDouble(jtfValor.getText());
+    }
+    
+    //sets
+    public void setValor(String valor){
+        jtfValor.setText(valor);
+    }
+    public void setQtdEstoque(String qtd){
+        jtfQtdEstoque.setText(qtd);
+    }
+    public void setMarca(String marca){
+        jcbMarca.setSelectedItem(marca);
+    }
+    public void setTipoSapato(String tipoSapato){
+        jcbTipo.setSelectedItem(tipoSapato);
+    }
+    public void setTamanho(String tamanho){
+        jcbTamanho.setSelectedItem(tamanho);
+    }
+    public void setGenero(String genero){
+        jcbGenero.setSelectedItem(genero);
+    }
     public void atualizarSapato(ActionListener evt){
         jbAtualizarDados.addActionListener(evt);
     }
@@ -189,12 +217,10 @@ public class AtualizarSapatos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JButton jVoltarMenu;
     private javax.swing.JButton jbAtualizarDados;
-    private javax.swing.JButton jbVerifID;
     private javax.swing.JComboBox<String> jcbGenero;
     private javax.swing.JComboBox<String> jcbMarca;
     private javax.swing.JComboBox<String> jcbTamanho;
     private javax.swing.JComboBox<String> jcbTipo;
-    private javax.swing.JTextField jtfID;
     private javax.swing.JTextField jtfQtdEstoque;
     private javax.swing.JTextField jtfValor;
     // End of variables declaration//GEN-END:variables

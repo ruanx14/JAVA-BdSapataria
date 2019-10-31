@@ -149,7 +149,7 @@ public class FormularioSapatos extends javax.swing.JFrame {
         jLabel7.setBounds(230, 410, 309, 47);
 
         fundoSapatos.setFont(new java.awt.Font("Lucida Sans", 1, 48)); // NOI18N
-        fundoSapatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/fundosSapatos.png"))); // NOI18N
+        fundoSapatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundosSapatos.png"))); // NOI18N
         getContentPane().add(fundoSapatos);
         fundoSapatos.setBounds(0, 0, 1060, 590);
 

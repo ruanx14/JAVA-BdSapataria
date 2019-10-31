@@ -184,7 +184,7 @@ public class FormularioPessoas extends javax.swing.JFrame {
         getContentPane().add(jtfRua);
         jtfRua.setBounds(428, 365, 571, 45);
 
-        FUNDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/fundoPessoas.PNG"))); // NOI18N
+        FUNDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundoPessoas.PNG"))); // NOI18N
         getContentPane().add(FUNDO);
         FUNDO.setBounds(0, -40, 1170, 640);
 

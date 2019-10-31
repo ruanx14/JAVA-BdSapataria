@@ -12,6 +12,26 @@ import javax.swing.JOptionPane;
 
 public class PessoaDAO {
     Conexao conexao = new Conexao();
+    public void atualizarPessoa(Pessoas pessoa){
+        Connection conn = conexao.conectar();
+        try{
+            PreparedStatement pst = conn.prepareStatement("update pessoas set nome=?,telefone=?, bairro=?, rua=?,genero=?,cpf=?,estado=? where idPessoas=?");
+            pst.setString(1,pessoa.getNome());
+            pst.setString(2,pessoa.getTelefone());
+            pst.setString(3,pessoa.getBairro());
+            pst.setString(4,pessoa.getRua());
+            pst.setString(5,pessoa.getGenero());
+            pst.setString(6,pessoa.getCpf());
+            pst.setString(7,pessoa.getEstado());
+            pst.setInt(8,pessoa.getIdPessoas());
+            if(pst.executeUpdate()==1){
+                JOptionPane.showMessageDialog(null, "Atualização concluída!");
+            }
+        }catch(SQLException ex){
+            System.out.println("Erro: "+ex.getMessage());
+        }
+        conexao.fechar();
+    }
     public void adicionarPessoa(Pessoas pessoa){
         Connection conn = conexao.conectar();
         try{

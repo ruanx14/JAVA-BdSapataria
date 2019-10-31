@@ -234,7 +234,7 @@ public class FormularioVendas extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(660, 50, 510, 320);
 
-        FUNDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/fundoCadastroVendas.png"))); // NOI18N
+        FUNDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundoCadastroVendas.png"))); // NOI18N
         getContentPane().add(FUNDO);
         FUNDO.setBounds(0, 0, 1180, 480);
 

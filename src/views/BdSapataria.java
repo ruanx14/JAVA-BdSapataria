@@ -69,9 +69,9 @@ public class BdSapataria extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(700, 700));
         getContentPane().setLayout(null);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/ModeloLeft.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ModeloLeft.png"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, -10, 354, 600);
+        jLabel2.setBounds(20, -10, 360, 600);
 
         Guias.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
 
@@ -79,7 +79,7 @@ public class BdSapataria extends javax.swing.JFrame {
 
         jbCadastrarVendas.setBackground(new java.awt.Color(204, 204, 204));
         jbCadastrarVendas.setFont(new java.awt.Font("Meiryo", 1, 24)); // NOI18N
-        jbCadastrarVendas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/cadastrarVendas.png"))); // NOI18N
+        jbCadastrarVendas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cadastrarVendas.png"))); // NOI18N
         jbCadastrarVendas.setText("              Cadastrar Vendas");
         jbCadastrarVendas.setActionCommand("Cadastrar Pessoas");
         jbCadastrarVendas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -88,14 +88,14 @@ public class BdSapataria extends javax.swing.JFrame {
 
         jbCadastrarSapatos.setBackground(new java.awt.Color(204, 204, 204));
         jbCadastrarSapatos.setFont(new java.awt.Font("Meiryo", 1, 24)); // NOI18N
-        jbCadastrarSapatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/cadastrarSapatos.png"))); // NOI18N
+        jbCadastrarSapatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cadastrarSapatos.png"))); // NOI18N
         jbCadastrarSapatos.setText("              Cadastrar Sapatos");
         jbCadastrarSapatos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jbCadastrarSapatos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jbCadastrarPessoas.setBackground(new java.awt.Color(204, 204, 204));
         jbCadastrarPessoas.setFont(new java.awt.Font("Meiryo", 1, 24)); // NOI18N
-        jbCadastrarPessoas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/cadastrarPessoas.png"))); // NOI18N
+        jbCadastrarPessoas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cadastrarPessoas.png"))); // NOI18N
         jbCadastrarPessoas.setText("              Cadastrar Pessoas");
         jbCadastrarPessoas.setActionCommand("Cadastrar Pessoas");
         jbCadastrarPessoas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -126,21 +126,21 @@ public class BdSapataria extends javax.swing.JFrame {
         Guias2.setBackground(new java.awt.Color(204, 204, 204));
 
         jbPessoas.setFont(new java.awt.Font("Meiryo", 1, 24)); // NOI18N
-        jbPessoas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/visualizarPessoas.png"))); // NOI18N
+        jbPessoas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/visualizarPessoas.png"))); // NOI18N
         jbPessoas.setText("Visualizar Pessoas                  ");
         jbPessoas.setToolTipText("");
         jbPessoas.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jbPessoas.setPreferredSize(new java.awt.Dimension(650, 210));
 
         jbSapatos.setFont(new java.awt.Font("Meiryo", 1, 24)); // NOI18N
-        jbSapatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/visualizarSapatos.png"))); // NOI18N
+        jbSapatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/visualizarSapatos.png"))); // NOI18N
         jbSapatos.setText("Visualizar Sapatos                  ");
         jbSapatos.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jbSapatos.setMinimumSize(new java.awt.Dimension(650, 210));
         jbSapatos.setPreferredSize(new java.awt.Dimension(650, 210));
 
         jbVendas.setFont(new java.awt.Font("Meiryo", 1, 24)); // NOI18N
-        jbVendas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/visualizarVendas.png"))); // NOI18N
+        jbVendas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/visualizarVendas.png"))); // NOI18N
         jbVendas.setText("Visualizar Vendas                  ");
         jbVendas.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
@@ -171,7 +171,7 @@ public class BdSapataria extends javax.swing.JFrame {
         getContentPane().add(Guias);
         Guias.setBounds(390, 20, 620, 530);
 
-        FUNDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SapatariaImagens/fundoBdSapataria.png"))); // NOI18N
+        FUNDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundoBdSapataria.png"))); // NOI18N
         getContentPane().add(FUNDO);
         FUNDO.setBounds(-110, 0, 1190, 690);
 

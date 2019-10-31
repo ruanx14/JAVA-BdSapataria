@@ -11,7 +11,25 @@ import javax.swing.JOptionPane;
 
 public class SapatosDAO {
     Conexao conexao = new Conexao();
-    
+    public void atualizarSapato(Sapatos sapatos){
+        Connection conn = conexao.conectar();
+        try{
+            PreparedStatement pst = conn.prepareStatement("update sapatos set tipoSapato=?, generoSapato=?, marca=?,tamanho=?,qtdEstoque=?,valor=? where idSapatos=?");
+            pst.setString(1, sapatos.getTipoSapato());
+            pst.setString(2, sapatos.getGeneroSapato());
+            pst.setString(3, sapatos.getMarca());
+            pst.setString(4, sapatos.getTamanho());
+            pst.setInt(5, sapatos.getQtdEstoque());
+            pst.setDouble(6, sapatos.getValor());
+            pst.setInt(7, sapatos.getIdSapatos());
+            if(pst.executeUpdate()==1){
+                JOptionPane.showMessageDialog(null, "Atualização concluída!");
+            }
+        }catch(SQLException ex){
+            System.out.println("Erro: "+ex.getMessage());
+        }
+        conexao.fechar();
+    }
     public void adicionarSapato(Sapatos sapato){
         Connection conn = conexao.conectar();
         try{
@@ -49,7 +67,6 @@ public class SapatosDAO {
                rs.getInt("qtdEstoque"),
                rs.getDouble("valor")
             );
-                System.out.println(rs.getString("marca"));
             pesquisas.add(sapatos);    
             }while(rs.next());
         }
