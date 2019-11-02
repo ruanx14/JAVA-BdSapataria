@@ -66,9 +66,9 @@ public class VisualizarSapatosController {
     private class ProcurarSapato implements ActionListener{
         public void actionPerformed(ActionEvent ae) {
             sapatos = new SapatosDAO();
-            Vector listaTodos = sapatos.pesquisarSapatos("select * from sapatos where marca like '"+view.getMarcaTipo()+"'"+"or tipoSapato like '"+view.getMarcaTipo()+"'");
+            Vector listaTodos = sapatos.pesquisarSapatos("select * from sapatos where marca like '%"+view.getMarcaTipo()+"%'"+"or tipoSapato like '%"+view.getMarcaTipo()+"%'");
             view.setAlterarTabela(retornarLinhas(listaTodos), retornarColunas());
-            view.setQuantidadeTotal(sapatos.pesquisarSapatosTotal("select count(*) from sapatos where marca like '"+view.getMarcaTipo()+"'"+"or tipoSapato like '"+view.getMarcaTipo()+"'"));
+            view.setQuantidadeTotal(sapatos.pesquisarSapatosTotal("select count(*) from sapatos where marca like '%"+view.getMarcaTipo()+"%'"+"or tipoSapato like '%"+view.getMarcaTipo()+"%'"));
         } 
     }
     public Vector retornarLinhas(Vector objetos){

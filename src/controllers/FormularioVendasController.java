@@ -1,11 +1,42 @@
 package controllers;
+
+import com.itextpdf.text.DocumentException;
 import views.FormularioVendas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import views.BdSapataria;
+import models.bean.Pessoas;
+import models.bean.Sapatos;
+import models.bean.Vendas;
+import models.bean.Vendas_Sapatos;
+import models.dao.PessoaDAO;
+import models.dao.SapatosDAO;
+import models.dao.VendasDAO;
+import models.dao.Vendas_SapatosDAO;
+import models.bean.GerarPDF;
+import views.VisualizarVendas;
 
 public class FormularioVendasController {
+    //variaveis globais
     private FormularioVendas view;
+    SapatosDAO sapatos;
+    DefaultTableModel tabela;
+    
+    //variáveis para o pdf
+    Pessoas pessoaPdf;
+    
+    
     public FormularioVendasController(FormularioVendas view){
         this.view = view;
         //listeners nos botoes das view
@@ -19,20 +50,79 @@ public class FormularioVendasController {
         this.view.jPesquisarCPF(new PesquisarCPF());
         this.view.jPesquisarID(new PesquisarID());
         this.view.jPesquisaMarca(new PesquisarMarca());
-        //
         this.view.setVisible(true);
+        Date data = new Date(System.currentTimeMillis());
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+        this.view.alterarData(formatador.format(data));
+        tabela = view.retornarTabelaModel();
     }
     
     //Tratativas das listeners
     private class JLimpar implements ActionListener{
         public void actionPerformed(ActionEvent ae) {
-            
+            view.setRetornoBairro("");
+            view.setRetornoEstado("");
+            view.setRetornoGenero("");
+            view.setRetornoNome("");
+            view.setRetornoRua("");
+            view.setRetornoTelefone("");
         }
         
     }
     private class JCadastrarVenda implements ActionListener{
         public void actionPerformed(ActionEvent ae) {
-            
+                //pegando models de venda
+                VendasDAO vendasModel = new VendasDAO();
+                //informacoes de venda
+                Vendas venda = new Vendas();
+                venda.setIdPessoas(pessoaPdf.getIdPessoas());
+                venda.setDataVenda(view.jftfData());
+                venda.setFormaPagamento(view.jcbForma());
+                venda.setTotal(Double.parseDouble(view.jftfPreco()));
+                //cadastrando e retornando id gerado
+                int idGerado = vendasModel.adicionarVenda(venda);
+                //pegando models de vendas_sapatos
+                Vendas_SapatosDAO vendasMulti = new Vendas_SapatosDAO();
+                //informacoes de vendas_sapatos
+                for(int i=0;i<tabela.getRowCount();i++){
+                    Vendas_Sapatos vendasSapatos = new Vendas_Sapatos();
+                    vendasSapatos.setIdVendas(idGerado);
+                    vendasSapatos.setQtdPedidos(Integer.parseInt(tabela.getValueAt(i, 3).toString()));
+                    vendasSapatos.setIdSapatos(Integer.parseInt(tabela.getValueAt(i, 0).toString()));
+                    vendasMulti.cadastrarVendas(vendasSapatos);
+                }
+                
+                //pdf 
+                JFileChooser pdf = new JFileChooser();
+                pdf.showSaveDialog(view);
+                File local = pdf.getSelectedFile();
+                GerarPDF gerar = new GerarPDF(
+                pessoaPdf.getIdPessoas(),
+                idGerado,
+                pessoaPdf.getNome(),
+                pessoaPdf.getCpf(),
+                pessoaPdf.getBairro(),
+                pessoaPdf.getRua(),
+                venda.getDataVenda(),
+                String.valueOf(venda.getTotal()),
+                venda.getFormaPagamento(),
+                retornarLista(0),
+                retornarLista(1),
+                retornarLista(2),
+                retornarLista(3)
+                );
+                try {
+                    gerar.gerarPDF(local);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(FormularioVendasController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (DocumentException ex) {
+                    Logger.getLogger(FormularioVendasController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                //atualizar qtdEstoque
+                //redirecionando
+                new VisualizarVendasController(new VisualizarVendas());
+                view.dispose();
+
         }
         
     }
@@ -45,274 +135,126 @@ public class FormularioVendasController {
     }
     private class JAdicionarCarrinho implements ActionListener{
         public void actionPerformed(ActionEvent ae) {
-            
+            ArrayList carrinhosItem = view.retornarClicado();
+            view.adicionarLinhaCarrinho(tabela,carrinhosItem);
+            infoCarrinho();
         }
         
     }
     private class AlterarQuantidadeSapato implements ActionListener{
         public void actionPerformed(ActionEvent ae) {
-            
+            String num = JOptionPane.showInputDialog(null,"Quantos pares você deseja deste?");
+            view.alterarLinhaCarrinho(tabela,num, view.retornarLinhaCarrinho(),3);
+            //validar maior que a do estoque
+            infoCarrinho();
         }
         
     }
     private class ApagarSapatoCarrinho implements ActionListener{
         public void actionPerformed(ActionEvent ae) {
-            
+            //JOptionPane.showConfirmDialog(null,"Certeza que deseja apagar este?");
+            view.apagarLinhaCarrinho(tabela, view.retornarLinhaCarrinho());
+            infoCarrinho();
         }
         
     }
     private class ExibirSapatos implements ActionListener{
         public void actionPerformed(ActionEvent ae) {
-            
+            sapatos = new SapatosDAO();
+            Vector listaTodos = sapatos.pesquisarSapatos("select * from sapatos");
+            view.alterarModeloTabela(retornarLinhas(listaTodos), retornarColunas());
         }
         
     }
     private class PesquisarCPF implements ActionListener{
         public void actionPerformed(ActionEvent ae) {
-            
+                PessoaDAO pessoaModel = new PessoaDAO();
+                Vector<Pessoas> pessoa = pessoaModel.pesquisarPessoas("select * from pessoas where cpf='"+view.getCpfCliente()+"'");
+                for(Pessoas obj : pessoa){
+                    view.setRetornoBairro(obj.getBairro());
+                    view.setRetornoEstado(obj.getEstado());
+                    view.setRetornoGenero(obj.getGenero());
+                    view.setRetornoNome(obj.getNome());
+                    view.setRetornoRua(obj.getRua());
+                    view.setRetornoTelefone(obj.getTelefone());
+                    pessoaPdf = obj;
+                }
         }   
     }
     private class PesquisarID implements ActionListener{
         public void actionPerformed(ActionEvent ae) {
-            
+            sapatos = new SapatosDAO();
+            Vector listaTodos = sapatos.pesquisarSapatos("select * from sapatos where idSapatos="+view.jtfSapato());
+            view.alterarModeloTabela(retornarLinhas(listaTodos), retornarColunas());
         }
         
     }
     private class PesquisarMarca implements ActionListener{
         public void actionPerformed(ActionEvent ae) {
-            
-        }
-        
+            sapatos = new SapatosDAO();
+            Vector listaTodos = sapatos.pesquisarSapatos("select * from sapatos where marca like '%"+view.jtfMarcaTipo()+"%' or tipoSapato like '%"+view.jtfMarcaTipo()+"%'");
+            view.alterarModeloTabela(retornarLinhas(listaTodos), retornarColunas());
+        }  
     }
-    
-    
-}
-
-/*
-##desligar botoes de cliente 
-
-        jtfPrecoTotal.setEnabled(false);
-        jtfRetornoNome.setEnabled(false);
-        jtfRetornoNomeSapato.setEnabled(false);
-        jtfRetornoMarca.setEnabled(false);
-        jtfRetornoTamanho.setEnabled(false);
-        jtfRetornoQtdEstoque.setEnabled(false);
-        jtfRetornoRua.setEnabled(false);
-        jtfQuantidadeTotal.setEnabled(false);
-##limpar 
-
-    public void limpar (){
-    jtfRetornoNome.setText("");  
-    jtfRetornoNomeSapato.setText("");
-    jtfPrecoTotal.setText("");
-    jftfDataVenda.setText("");
-    jftCpf.setText("");
-    jtfRetornoMarca.setText("");
-    jtfRetornoTamanho.setText("");
-    jtfRetornoQtdEstoque.setText("");
-    jtfQuantidadeTotal.setText("");
-    jtfRetornoRua.setText("");
-   }
-   
-##outros 
- 
-   public void preencherTabela(String sql){
-   ArrayList<Object> dados = new ArrayList<>();
-   String [] colunas = new String[]{"idSapatos","Tipo Sapato","Quantidade/Estoque","Genero","Tamanho","Preço","Marca"};
-   conecta.abrirBdcon();
-   conecta.executaSql(sql);
-   try {
-   conecta.rs.first();
-    do {
-    dados.add(new Object[]{conecta.rs.getInt("idSapatos"),conecta.rs.getString("tipoSapato"),conecta.rs.getInt("qtdEstoque"),conecta.rs.getString("generoSapato"),conecta.rs.getString("tamanho"),conecta.rs.getDouble("valor"),conecta.rs.getString("marca")});
-    }while(conecta.rs.next()); 
+    private Vector retornarLinhas(Vector objetos){
+        Vector<Sapatos> todosResultados = objetos;
+        Vector linhas = new Vector();
+        for(Sapatos sapatos : todosResultados){
+            Vector linha = new Vector();
+            linha.add(sapatos.getIdSapatos());
+            linha.add(sapatos.getTamanho());
+            linha.add(sapatos.getMarca());  
+            linha.add(sapatos.getTipoSapato());
+            linha.add(sapatos.getGeneroSapato());
+            linha.add(sapatos.getQtdEstoque());
+            linha.add(sapatos.getValor());
+            linhas.add(linha);
+        }  
+        return linhas;
     }
-    catch(SQLException ex){
-    System.out.println("Erro ao preencher tabela  "+sql+" "+ex.getMessage());
+    private Vector retornarColunas(){
+        Vector colunas = new Vector();
+            colunas.add("IDSapatos");
+            colunas.add("Tamanho");
+            colunas.add("Marca");
+            colunas.add("Tipo do Sapato");
+            colunas.add("Genero Sapato");
+            colunas.add("Quantidade estoque");
+            colunas.add("Valor");
+        return colunas;
     }
-    ModeloTabela modelo = new ModeloTabela(dados, colunas);
-    jtTudo.setModel(modelo);     
-    jtTudo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    conecta.fecharBdcon();     
- }
- 
- public void preencherValorTotal(String sql){
-     int valorTotal=0;
-     conecta.abrirBdcon();
-     conecta.executaSql(sql);
-     try{
-       conecta.rs.first();
-       valorTotal = conecta.rs.getInt("count(*)");
-     }
-     catch(SQLException e){
-         System.out.println("Erro ao pegar valor total."+ e.getMessage());
-     }
-     jtfQuantidadeTotal.setText(Integer.toString(valorTotal));
-    
- }
-   private void salvarItem(){
-       Object id = jtTudo.getValueAt(jtTudo.getSelectedRow(),0);
-       int idC=0;
-       Object tipo = jtTudo.getValueAt(jtTudo.getSelectedRow(),1);
-       Object preco = jtTudo.getValueAt(jtTudo.getSelectedRow(),5);
-       DefaultTableModel tc = (DefaultTableModel) jtCarrinho.getModel();
-       idC = Integer.parseInt(id.toString());
-       if(verifId(idC)){
-       tc.addRow(new Object[]{id,tipo,preco,1});
-       verifPreco();
-       verificarSapato();
-       }else{
-           JOptionPane.showMessageDialog(null,"Produto ja esta no carrinho");
+    private String totalSapatos(){
+       tabela = view.retornarTabelaModel();
+       int total = 0;
+       for(int i=0;i<tabela.getRowCount();i++){
+           total += Integer.parseInt(String.valueOf(tabela.getValueAt(i, 3)));
        }
-       ligarBotao();
-   }
-   
-   private double verificarSapato(){
-   int cont=0;
-   for(int i=0;i<=jtCarrinho.getRowCount()-1;i++){
-   cont+=Integer.parseInt(jtCarrinho.getValueAt(i,3).toString());  
-   }
-   jtfQuantidadeTotal.setText(Integer.toString(cont));        
-   return cont;
-   }
-   public double verifPreco(){
-       double qtd,pre,som=0; 
-         String c = jtCarrinho.getValueAt(0,0).toString();
-        qtd = Double.parseDouble(jtCarrinho.getValueAt(0,3).toString());
-        preco = Double.parseDouble(jtCarrinho.getValueAt(0,2).toString());
-        som = qtd*preco;
-        double linhas=0;
-        som=0;
-        for(int i=0;i<jtCarrinho.getRowCount();i++){
-            preco = Double.parseDouble(jtCarrinho.getValueAt(i,3).toString());
-            linhas = Double.parseDouble(jtCarrinho.getValueAt(i,2).toString());
-            som +=linhas*preco;
-            
-        }
-        jtfPrecoTotal.setText(String.valueOf(som));
-        return som;
-   }
- 
-   public boolean verifId(int idV){
-      int idd=0,a=0;
-       for(int i=0;i<jtCarrinho.getRowCount();i++){
-          idd = Integer.parseInt(jtCarrinho.getValueAt(i,0).toString());
-          if(idV==idd){ 
-            a++;   
-          }
-   }
-   if(a>0){
-        return false;
-   }else{
-       return true;
-   }
-}
-   public boolean ligarBotao(){
-       jbsetQtd.setEnabled(true);
-       return true;
-   }
-   public boolean desligarBotao(){
-       jbsetQtd.setEnabled(false);
-       return false;
-   }
-   public boolean temLinhas(){
-       if(jtCarrinho.getRowCount()>0){
-           return true;
-       }else{
-           return false;
-       }
-   }
-     
-}
-##outros2
-   private int verificarQtdSapato(int a){
-       conecta.abrirBdcon();
-       conecta.executaSql("select * from sapatos where idSapatos='"+a+"'");
-       try{
-       conecta.rs.first();       
-       qtdEstoque = conecta.rs.getInt("qtdEstoque");
-       }catch(SQLException e){
-           JOptionPane.showMessageDialog(null,"Erro: "+ e.getMessage());
-       }    
-       conecta.fecharBdcon();
-       return qtdEstoque;
-   }   
-
-  if(temLinhas()){
-    int qtd=0,id=0;
-    Object qtdO = jtCarrinho.getValueAt(jtCarrinho.getSelectedRow(),3);
-    Object idO = jtCarrinho.getValueAt(jtCarrinho.getSelectedRow(),0);
-    qtd = Integer.parseInt(qtdO.toString()); 
-    id = Integer.parseInt(idO.toString());
-       
-        int qtdN = 1;
-        qtdN = Integer.parseInt(JOptionPane.showInputDialog("Digite o novo valor para quantidade"));
-          if(qtdN>verificarQtdSapato(id)){
-          JOptionPane.showMessageDialog(null,"Quantidade maior que a do estoque");  
-          }else if(qtdN==0){
-          JOptionPane.showMessageDialog(null,"Quantidade minima 1");
-          }else{
-          jtCarrinho.setValueAt(qtdN,jtCarrinho.getSelectedRow(),3); 
-          }
-          ligarBotao();
-    verifPreco();
-    verificarSapato();
-    }else{
-        JOptionPane.showMessageDialog(null,"Não tem sapatos selecionados");
+       return String.valueOf(total);
     }
     
-  DefaultTableModel tc = (DefaultTableModel) jtCarrinho.getModel();
-    tc.removeRow(jtCarrinho.getSelectedRow());
-    ci--;
-    verificarSapato();
-    if(temLinhas()){
-    verifPreco();
-    }else{
-        jtfPrecoTotal.setText("0.0");
-    }
-
-
-
-##outros33
-
- JFileChooser pdf = new JFileChooser();
-    pdf.showSaveDialog(this);
-    File local = pdf.getSelectedFile();
-    v1.setFormaPagamento(jcbFormaPagamento.getSelectedItem().toString());
-    v1.setDataVenda(jftfDataVenda.getText());
-    v1.setTotal(Double.parseDouble(jtfPrecoTotal.getText()));
-    //if((v1.getTotal()==0)||(v1.getDataVenda().equals(null))){
-    if(v1.getDataVenda().equals(null)){
-    JOptionPane.showMessageDialog(null,"Campos Nulos");
-    }else{
-    v1.cadastrarVenda();
-    vs.setIdVendas(v1.getIdVendas());
-    ArrayList<Object> Sapatos = new ArrayList<>();
-    ArrayList<Object> Quantidades = new ArrayList<>();
-    ArrayList<Object> TipoSapato = new ArrayList<>();
-    ArrayList<Object> Preco = new ArrayList<>();
-    for(int i=0;i<jtCarrinho.getRowCount();i++){
-    Sapatos.add(jtCarrinho.getValueAt(i,0));
-    Quantidades.add(jtCarrinho.getValueAt(i,3));
-    TipoSapato.add(jtCarrinho.getValueAt(i,1));
-    Preco.add(jtCarrinho.getValueAt(i,2));
-    vs.setIdSapatos((int) Sapatos.get(i));
-    vs.setQtdPedidos((int) Quantidades.get(i));
-    vs.cadastrarVendas();
-    updateQuantidade((int)Quantidades.get(i),(int)Sapatos.get(i));
-    }
-    gpdf.adicionarInformacoes(vs.getIdVendas(),p2.getIdPessoas(),p2.getNome(),p2.getBairro(),p2.getRua(),p2.getCpf(),v1.getTotal(),Sapatos,Quantidades,TipoSapato,Preco);
-        try {
-        gpdf.gerarPDF(local);
-        } catch (FileNotFoundException ex) {
-            System.out.println("Erro: "+ex.getMessage());
-        } catch (DocumentException ex) {
-            System.out.println("Erro: "+ex.getMessage());
+    private String precoSapatos(){
+        tabela = view.retornarTabelaModel();
+       double preco, linhas, som;
+       som = 0;
+       for(int i=0;i<tabela.getRowCount();i++){
+            preco = Double.parseDouble(tabela.getValueAt(i,3).toString());
+            linhas = Double.parseDouble(tabela.getValueAt(i,2).toString());
+            som += linhas*preco;   
         }
-    limpar();
-    BdSapataria dd = new BdSapataria();
-    dd.setVisible(true);
-    dispose();
+       return String.valueOf(som);
+    }
+    private void infoCarrinho(){
+        view.setTotalPreco(precoSapatos());
+        view.setTotalQuantidade(totalSapatos());
+    }
+    private ArrayList retornarLista(int coluna){
+        ArrayList lista = new ArrayList();
+        for(int i=0;i<tabela.getRowCount();i++){
+            lista.add(tabela.getValueAt(i,coluna));
+        }
+        return lista;
+    }
+    
+    
+}
 
-
-*/

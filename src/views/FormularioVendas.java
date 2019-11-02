@@ -1,10 +1,21 @@
 package views;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 public class FormularioVendas extends javax.swing.JFrame {
     public FormularioVendas() {
         initComponents();
+        jtfRetornoRua.setEnabled(false);
+        jtfRetornoMarca.setEnabled(false);
+        jtfRetornoNome.setEnabled(false);
+        jtfRetornoTamanho.setEnabled(false);
+        jtfRetornoQtdEstoque.setEnabled(false);
+        jtfRetornoNomeSapato.setEnabled(false);
+        jtfPrecoTotal.setEnabled(false);
+        jtfQuantidadeTotal.setEnabled(false);
       }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -241,7 +252,91 @@ public class FormularioVendas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     //gets e sets
- 
+    public String getCpfCliente(){
+        return jftCpf.getText();
+    }
+    //campos data e preco para cadastrar
+    public String jftfData(){
+        return jftfDataVenda.getText();
+    }
+    public String jftfPreco(){
+        return jtfPrecoTotal.getText();
+    }
+    public String jcbForma(){
+        return jcbFormaPagamento.getSelectedItem().toString();
+    }
+    //data e hora de hoje
+    public void alterarData(String data){
+        jftfDataVenda.setText(data);
+    }
+    //sets do cliente
+    public void setRetornoNome(String txt){
+        jtfRetornoNome.setText(txt);
+    }
+    public void setRetornoTelefone(String txt){
+        jtfRetornoMarca.setText(txt);
+    }
+    public void setRetornoBairro(String txt){
+        jtfRetornoNomeSapato.setText(txt);
+    }
+    public void setRetornoEstado(String txt){
+        jtfRetornoQtdEstoque.setText(txt);
+    }
+    public void setRetornoRua(String txt){
+        jtfRetornoRua.setText(txt);
+    }
+    public void setRetornoGenero(String txt){
+        jtfRetornoTamanho.setText(txt);
+    }
+    //sets do total e quantidade
+    public void setTotalPreco(String txt){
+        jtfPrecoTotal.setText(txt);
+    }
+    public void setTotalQuantidade(String txt){
+        jtfQuantidadeTotal.setText(txt);
+    }
+    
+    
+    //de pesquisa do carrinho
+    public String jtfSapato(){
+        return jtfSapato.getText();
+    }
+    public String jtfMarcaTipo(){
+        return jtfOutros.getText();
+    }
+    //adicionar no carrinho
+    public ArrayList retornarClicado(){
+        ArrayList sapato = new ArrayList();
+        sapato.add(jtTudo.getValueAt(jtTudo.getSelectedRow(), 0));
+        sapato.add(jtTudo.getValueAt(jtTudo.getSelectedRow(), 3));
+        sapato.add(jtTudo.getValueAt(jtTudo.getSelectedRow(), 6));
+        sapato.add(1);
+        return sapato;
+    }
+    public DefaultTableModel retornarTabelaModel(){
+        DefaultTableModel tabela = (DefaultTableModel) jtCarrinho.getModel();
+        return tabela;
+    }
+    public void alterarLinhaCarrinho(DefaultTableModel tabela, String novoValor, int linha, int coluna){
+        tabela.setValueAt(novoValor, linha, coluna);
+    }
+    public void apagarLinhaCarrinho(DefaultTableModel tabela, int linha){
+        tabela.removeRow(linha);
+    }
+    public int retornarLinhaCarrinho(){
+        return jtCarrinho.getSelectedRow();
+    }
+    public void adicionarLinhaCarrinho(DefaultTableModel tabela, ArrayList linha){
+        Vector obj = new Vector();
+        for(int i=0;i<linha.size();i++){
+            obj.add(linha.get(0));
+            obj.add(linha.get(1));
+            obj.add(linha.get(2));
+            obj.add(linha.get(3));
+        }
+        tabela.addRow(obj);
+    }
+    
     //outros botoes
     public void jAdicionarCarrinho(ActionListener listener){
         jbSalvarCarrinho.addActionListener(listener);
@@ -274,7 +369,11 @@ public class FormularioVendas extends javax.swing.JFrame {
     public void jVoltarMenu(ActionListener evt){
         jVoltarMenu3.addActionListener(evt);
     }
-  
+    public void alterarModeloTabela(Vector linhas, Vector colunas){
+        DefaultTableModel modelo = new DefaultTableModel(linhas,colunas);
+        jtTudo.setModel(modelo);
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

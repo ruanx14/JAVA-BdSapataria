@@ -2,24 +2,15 @@ package models.bean;
 
 public class Vendas {
      private int idVendas;
-     private int idSapatos;
      private int idPessoas;
-     
-     private String cpf;
      private String dataVenda;
      private String formaPagamento;
-     
      private double total;
-     private int qtdPedido;
+      
+     
      
     public Vendas(){
         
-    }
-    public void setQtdPedido(int qtdPedido){
-        this.qtdPedido = qtdPedido;
-    }
-    public int getQtdPedido(){
-        return qtdPedido;
     }
     public String getFormaPagamento() {
         return formaPagamento;
@@ -50,22 +41,6 @@ public class Vendas {
     public void setIdVendas(int idVendas) {
        this.idVendas = idVendas;
     }
-    public int getIdSapatos() {
-        return idSapatos;
-    }
-
-    public void setIdSapatos(int idSapatos) {
-        this.idSapatos = idSapatos;
-    }
-
-    public String getCpf() {
-       return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-  }  
-
     public int getIdPessoas() {
         return idPessoas;
     }

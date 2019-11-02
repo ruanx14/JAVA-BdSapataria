@@ -1,20 +1,25 @@
 package models.dao;
+import conexao.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import models.bean.Vendas_Sapatos;
 
 public class Vendas_SapatosDAO {
-    /*
-      public void cadastrarVendas(){
-    conecta.abrirBdcon();
+    Conexao conexao = new Conexao();
+    
+    public void cadastrarVendas(Vendas_Sapatos obj){
+    Connection conn = conexao.conectar();
     try{
-     PreparedStatement pst = conecta.con.prepareStatement("insert into Vendas_Sapatos(idVendas,idSapatos,qtdPedidos) values (?,?,?)");
-     pst.setInt(1,getIdVendas());
-     pst.setInt(2,getIdSapatos());
-     pst.setInt(3,getQtdPedidos());
+     PreparedStatement pst = conn.prepareStatement("insert into Vendas_Sapatos(idVendas,idSapatos,qtdPedidos) values (?,?,?)");
+        pst.setInt(1,obj.getIdVendas());
+        pst.setInt(2,obj.getIdSapatos());
+        pst.setInt(3,obj.getQtdPedidos());
      pst.execute();
      }
      catch(SQLException ex){
      System.out.println("Erro: "+ ex.getMessage());
-     JOptionPane.showMessageDialog(null, "Falha: "+ ex.getMessage());
     }
-    conecta.fecharBdcon();
-    }   */
+    conexao.fechar();
+    }
 }
