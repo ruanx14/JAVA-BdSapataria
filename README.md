@@ -1,4 +1,6 @@
 # JAVA-BdSapataria
+A simple application CRUD about shoe sales, just for database manipulation training and java language.
+
 Net Beans IDE - Java Basic Project
 *MySQL
 Mysql to connection with the database;
