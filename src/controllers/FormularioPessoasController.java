@@ -2,6 +2,7 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import views.BdSapataria;
 import views.FormularioPessoas;
 import models.bean.Pessoas;
@@ -30,9 +31,14 @@ public class FormularioPessoasController {
               pessoa.setGenero(telaView.getGenero());
               pessoa.setTelefone(telaView.getTelefone());
               pessoa.setRua(telaView.getJtfRua());
-              //validacoes;
-              PessoaDAO pessoadao = new PessoaDAO();
-              pessoadao.adicionarPessoa(pessoa);
+              if(pessoa.getBairro().isEmpty() || pessoa.getRua().isEmpty() || pessoa.getNome().isEmpty()){
+              //if(pessoa.getRua()instanceof String)
+              //validation for CPF missing
+                    JOptionPane.showMessageDialog(null,"Há campos vazios, trate de os preencher!");
+              }else{
+                   PessoaDAO pessoadao = new PessoaDAO();
+                   pessoadao.adicionarPessoa(pessoa); 
+              }
         }
     }
     private class JLimpar implements ActionListener{

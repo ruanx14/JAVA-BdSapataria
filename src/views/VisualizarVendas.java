@@ -23,6 +23,9 @@ public class VisualizarVendas extends javax.swing.JFrame {
     public String getNomeTipo(){
         return jtfOutros.getText();
     }
+    public void setLabel(String txt){
+        jLabel1.setText(txt);
+    }
     public void setAlterarTabela(Vector linhas, Vector colunas){
         DefaultTableModel modelo = new DefaultTableModel(linhas,colunas);
         jtVendas.setModel(modelo);
@@ -106,13 +109,13 @@ public class VisualizarVendas extends javax.swing.JFrame {
         getContentPane().add(jbVenda);
         jbVenda.setBounds(198, 11, 93, 27);
 
-        jLabel1.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setFont(new java.awt.Font("Aharoni", 1, 20)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("Quantidade de vendas:");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabel1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(621, 495, 322, 32);
+        jLabel1.setBounds(590, 490, 360, 32);
 
         jbVoltar.setFont(new java.awt.Font("Aharoni", 1, 24)); // NOI18N
         jbVoltar.setText("> Voltar <");

@@ -83,6 +83,7 @@ public class FormularioVendasController {
                 int idGerado = vendasModel.adicionarVenda(venda);
                 //pegando models de vendas_sapatos
                 Vendas_SapatosDAO vendasMulti = new Vendas_SapatosDAO();
+                SapatosDAO sapatosDao = new SapatosDAO();
                 //informacoes de vendas_sapatos
                 for(int i=0;i<tabela.getRowCount();i++){
                     Vendas_Sapatos vendasSapatos = new Vendas_Sapatos();
@@ -90,6 +91,7 @@ public class FormularioVendasController {
                     vendasSapatos.setQtdPedidos(Integer.parseInt(tabela.getValueAt(i, 3).toString()));
                     vendasSapatos.setIdSapatos(Integer.parseInt(tabela.getValueAt(i, 0).toString()));
                     vendasMulti.cadastrarVendas(vendasSapatos);
+                    sapatosDao.atualizarSapato(Integer.parseInt(tabela.getValueAt(i, 0).toString()), Integer.parseInt(tabela.getValueAt(i, 3).toString()));
                 }
                 
                 //pdf 
@@ -118,8 +120,6 @@ public class FormularioVendasController {
                 } catch (DocumentException ex) {
                     Logger.getLogger(FormularioVendasController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                //atualizar qtdEstoque
-                //redirecionando
                 new VisualizarVendasController(new VisualizarVendas());
                 view.dispose();
 
@@ -136,25 +136,52 @@ public class FormularioVendasController {
     private class JAdicionarCarrinho implements ActionListener{
         public void actionPerformed(ActionEvent ae) {
             ArrayList carrinhosItem = view.retornarClicado();
-            view.adicionarLinhaCarrinho(tabela,carrinhosItem);
-            infoCarrinho();
-        }
+            int idVerificar = Integer.parseInt(carrinhosItem.get(0).toString());
+            if(view.retornarQuantidadeClicado()==0){
+                JOptionPane.showMessageDialog(null,"Sapato com 0 de estoque");
+            }else{
+                 if(verifTabelaCarrinho(idVerificar)){
+                     view.adicionarLinhaCarrinho(tabela,carrinhosItem);
+                     infoCarrinho();           
+                }else{
+                     JOptionPane.showMessageDialog(null,"Sapato já adicionado no carrinho, altere a quantidade");
+                } 
+            }
+       }
         
+    }
+    private boolean verifTabelaCarrinho(int obj){
+        int res = 0;
+        for(int i=0;i<tabela.getRowCount();i++){
+            int id = Integer.parseInt(tabela.getValueAt(i,0).toString());
+            System.out.println(id+ "<>"+ obj);
+            if(obj==id){
+                 return false;
+            }
+        }
+        return true;
     }
     private class AlterarQuantidadeSapato implements ActionListener{
         public void actionPerformed(ActionEvent ae) {
             String num = JOptionPane.showInputDialog(null,"Quantos pares você deseja deste?");
-            view.alterarLinhaCarrinho(tabela,num, view.retornarLinhaCarrinho(),3);
-            //validar maior que a do estoque
-            infoCarrinho();
+            int qtdEstoque = sapatos.qtdEstoque(Integer.parseInt(tabela.getValueAt(view.retornarLinhaCarrinho(), 0).toString()));
+                if(qtdEstoque<Integer.parseInt(num)){
+                    JOptionPane.showMessageDialog(null,"Quantidade maior que a do estoque");
+                }else{
+                    view.alterarLinhaCarrinho(tabela,num, view.retornarLinhaCarrinho(),3);
+                    infoCarrinho();
+                }
         }
         
     }
     private class ApagarSapatoCarrinho implements ActionListener{
         public void actionPerformed(ActionEvent ae) {
-            //JOptionPane.showConfirmDialog(null,"Certeza que deseja apagar este?");
-            view.apagarLinhaCarrinho(tabela, view.retornarLinhaCarrinho());
-            infoCarrinho();
+            int res = JOptionPane.showConfirmDialog(null,"Certeza que deseja apagar este?");
+            if(res==0){
+                view.apagarLinhaCarrinho(tabela, view.retornarLinhaCarrinho());
+            }else{
+                infoCarrinho();
+            }
         }
         
     }

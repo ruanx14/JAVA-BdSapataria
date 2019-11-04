@@ -2,14 +2,14 @@ package models.dao;
 
 import models.bean.Vendas;
 import conexao.Conexao;
+import java.awt.List;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import java.util.Vector;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 
@@ -34,33 +34,35 @@ public class VendasDAO {
             idGerado = rs.getInt(1);
         }
         }catch(SQLException e){
-            System.out.println("Erro:"+e.getMessage());
+            System.out.println("Erro: "+e.getMessage());
         }
         return idGerado;
     }
     
-    public Vector pesquisarVendas(String sql){
+    public ArrayList<ArrayList<String>> pesquisarVendas(String sql){
         Connection conn = conexao.conectar();
-        Vector pesquisas = new Vector();
+        ArrayList<ArrayList<String>> lista = new ArrayList();
         try{
         PreparedStatement pst = conn.prepareStatement(sql);
-        ResultSet rs = pst.executeQuery();
+        ResultSet rs = pst.executeQuery(); 
+            
         if(rs.next()){
             do{
-//            Vendas venda = new Vendas(
-//            rs.getInt("idVendas"),
-//            rs.getInt("Pessoas_idPessoas"),
-//            rs.getString("dataVenda"),
-//            rs.getString("formaPagamento"),
-//            rs.getDouble("valor")
-//            );    
-            //pesquisas.add(venda);
+                ArrayList<String> obj = new ArrayList();
+                obj.add(String.valueOf(rs.getInt("p.idPessoas")));
+                obj.add(String.valueOf(rs.getInt("v.idVendas")));
+                obj.add(rs.getString("p.nome"));
+                obj.add(rs.getString("p.cpf"));
+                obj.add(rs.getString("s.tipoSapato"));
+                obj.add(rs.getString("v.dataVenda"));
+                obj.add(rs.getString(String.valueOf("vs.qtdPedidos")));
+                lista.add(obj);
             }while(rs.next());
         }    
         }catch(SQLException ex){
-            System.out.println("Erro ao pesquisar"+ex.getMessage());
+            System.out.println("Erro ao pesquisar: "+ex.getMessage());
         }
         conexao.fechar();
-        return pesquisas;
+        return lista;
     }
 }

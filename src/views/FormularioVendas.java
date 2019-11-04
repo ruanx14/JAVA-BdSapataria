@@ -313,6 +313,10 @@ public class FormularioVendas extends javax.swing.JFrame {
         sapato.add(1);
         return sapato;
     }
+    public int retornarQuantidadeClicado(){
+        int sapato = Integer.parseInt(jtTudo.getValueAt(jtTudo.getSelectedRow(), 5).toString());
+        return sapato;
+    }
     public DefaultTableModel retornarTabelaModel(){
         DefaultTableModel tabela = (DefaultTableModel) jtCarrinho.getModel();
         return tabela;

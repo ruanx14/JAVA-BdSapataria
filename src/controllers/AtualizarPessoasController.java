@@ -1,6 +1,7 @@
 package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import views.AtualizarPessoas;
 import models.bean.Pessoas;
 import models.dao.PessoaDAO;
@@ -37,9 +38,15 @@ public class AtualizarPessoasController {
             pessoa.setGenero(view.getGenero());
             pessoa.setTelefone(view.getTelefone());
             PessoaDAO pessoaModel = new PessoaDAO();
-            //validacoes
-            pessoaModel.atualizarPessoa(pessoa);
-            view.dispose();
+            if(pessoa.getBairro().isEmpty() || pessoa.getRua().isEmpty() || pessoa.getNome().isEmpty()){
+              //if(pessoa.getRua()instanceof String)
+              //validation for CPF missing
+                JOptionPane.showMessageDialog(null,"Há campos vazios, trate de os preencher!");
+            }else{
+                pessoaModel.atualizarPessoa(pessoa);
+                view.dispose();
+            }
+          
         }
         
     }

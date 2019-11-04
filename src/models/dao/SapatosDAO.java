@@ -92,5 +92,34 @@ public class SapatosDAO {
         conexao.fechar();
         return numero;
     }
+    public void atualizarSapato(int id, int qtd){
+        Connection conn = conexao.conectar();
+        try{
+        PreparedStatement pst = conn.prepareStatement("update sapatos set qtdEstoque=qtdEstoque-? where idSapatos=?");
+        pst.setInt(1,qtd);
+        pst.setInt(2,id);
+        pst.executeUpdate();    
+        }catch(SQLException ex){
+            System.out.println("Erro ao pesquisar: "+ex.getMessage());
+        }
+        conexao.fechar();
+    }
+    public int qtdEstoque(int id){
+        Connection conn = conexao.conectar();
+        int qtd = 0;
+        try{
+        PreparedStatement pst = conn.prepareStatement("select qtdEstoque from sapatos where idSapatos=?");
+        pst.setInt(1,id);
+        ResultSet rs = pst.executeQuery();
+        if(rs.next()){
+            qtd = rs.getInt("qtdEstoque");
+        }
+        }catch(SQLException ex){
+            System.out.println("Erro ao pesquisar: "+ex.getMessage());
+        }
+        conexao.fechar();
+        return qtd;
+    }
+    
     
 }

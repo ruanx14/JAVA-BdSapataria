@@ -34,11 +34,10 @@ public class AtualizarSapatosController {
             view.getQtdEstoque(),
             view.getValor()
             );
-            SapatosDAO modelSapato = new SapatosDAO();
-            //validacoes;
-            modelSapato.atualizarSapato(sapato);
-            view.dispose();
-        }
-        
+            //missing 2 validations
+                SapatosDAO modelSapato = new SapatosDAO();
+                modelSapato.atualizarSapato(sapato);
+                view.dispose();  
+            }
     }
 }
